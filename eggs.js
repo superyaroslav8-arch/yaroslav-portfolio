@@ -1,4 +1,4 @@
-/* Extra easter eggs + fixed deep-scroll + ambient geese */
+/* eggs.js — no ambient scroll geese; fixed help buttons; more eggs */
 (function () {
   window.__deepScrollFixed = true;
   var overscrollCount = 0, deepMode = false, hackStarted = false, lastToast = 0;
@@ -21,6 +21,9 @@
     var title = document.querySelector('.hack-title');
     var sub = document.getElementById('hack-sub');
     var err404 = document.querySelector('.hack-404');
+    var helpBtn = document.getElementById('hack-help');
+    var reloadBtn = document.getElementById('hack-reload');
+
     if (err404) err404.style.display = 'none';
     if (title) title.style.display = 'none';
     if (sub) sub.style.display = 'none';
@@ -28,9 +31,11 @@
     if (progress) progress.hidden = true;
     if (goose) { goose.style.opacity = '0'; goose.classList.remove('drop'); }
     if (say) say.textContent = '';
+
     if (overlay) overlay.classList.add('active');
     if (hack) hack.classList.add('show');
     document.body.classList.add('egg-locked');
+
     if (matrix) {
       matrix.style.opacity = '0.55';
       var lines = [];
@@ -58,28 +63,86 @@
       }, 350);
     }
     banner('Ты провалился ниже сайта…', 3500);
+
+    var helped = false, refused = false;
+
     setTimeout(function () {
       if (err404) { err404.style.display = ''; err404.textContent = '???'; }
       if (title) { title.style.display = ''; title.textContent = 'Слишком глубоко'; }
       if (goose) { goose.style.opacity = '1'; goose.classList.add('drop'); }
-      var linesSay = ['Чё ты наделал?','Зачем листал дальше?','Сейчас починю код…','Не трогай ничего.','Почти… ещё секунда…'];
-      var li = 0;
-      function next() {
-        if (li >= linesSay.length) return;
-        if (say) say.textContent = linesSay[li];
-        speak(linesSay[li]);
-        if (typeof playHonk === 'function') playHonk(0.9 + li * 0.05);
-        li++;
-        if (li < linesSay.length) setTimeout(next, 4500);
-      }
-      next();
-    }, 8000);
-    setTimeout(function () {
-      if (say) say.textContent = 'Готово. Перезагрузка…';
-      speak('Готово. Перезагрузка');
-      if (typeof fireConfetti === 'function') fireConfetti();
-      setTimeout(function () { location.reload(); }, 2000);
-    }, 30000);
+      if (say) say.textContent = 'Чё ты наделал?';
+      speak('Чё ты наделал?');
+      if (typeof playHonk === 'function') playHonk(1);
+
+      setTimeout(function () {
+        if (say) say.textContent = 'Могу починить. Поможешь?';
+        speak('Могу починить. Поможешь?');
+        if (actions) {
+          actions.hidden = false;
+          if (helpBtn) helpBtn.style.display = '';
+          if (reloadBtn) {
+            reloadBtn.textContent = 'Не помогать';
+            reloadBtn.style.display = '';
+          }
+        }
+      }, 2500);
+    }, 7000);
+
+    var helpClicks = 0;
+    if (helpBtn) {
+      helpBtn.onclick = function () {
+        if (refused) return;
+        helped = true;
+        helpClicks++;
+        if (typeof playHonk === 'function') playHonk(1 + helpClicks * 0.08);
+        var thanks = ['Спасибо!', 'Ещё чуть-чуть…', 'Спасибо, помогаешь!', 'Почти починил…', 'Супер, спасибо!'];
+        var msg = thanks[Math.min(helpClicks - 1, thanks.length - 1)];
+        if (say) say.textContent = msg;
+        speak(msg);
+        if (progress) {
+          progress.hidden = false;
+          progress.textContent = 'Починка: ' + Math.min(helpClicks * 20, 100) + '%';
+        }
+        if (helpClicks >= 5) {
+          if (say) say.textContent = 'Готово! Спасибо. Перезагрузка…';
+          speak('Готово! Спасибо. Перезагрузка');
+          if (typeof fireConfetti === 'function') fireConfetti();
+          if (actions) actions.hidden = true;
+          setTimeout(function () { location.reload(); }, 2200);
+        }
+      };
+    }
+
+    if (reloadBtn) {
+      reloadBtn.onclick = function () {
+        if (helped && helpClicks >= 5) return;
+        refused = true;
+        if (actions) actions.hidden = true;
+        if (goose) {
+          goose.classList.remove('drop');
+          goose.style.transition = 'transform 1s ease, opacity 1s';
+          goose.style.transform = 'translateY(-40vh)';
+          goose.style.opacity = '0.3';
+        }
+        setTimeout(function () {
+          if (goose) {
+            goose.style.transform = 'translateY(0)';
+            goose.style.opacity = '1';
+            goose.classList.add('drop');
+          }
+          var line = 'Ну зря. Ладно, я пошёл, раз ты не хочешь помогать. Сиди дальше со взломом.';
+          if (say) say.textContent = line;
+          speak(line);
+          if (typeof playHonk === 'function') playHonk(0.7);
+          if (title) title.textContent = 'Взлом продолжается…';
+          if (err404) err404.textContent = '404';
+          if (progress) {
+            progress.hidden = false;
+            progress.textContent = 'Перезагрузи страницу сам — иначе так и останется.';
+          }
+        }, 900);
+      };
+    }
   }
 
   function onOver() {
@@ -121,7 +184,7 @@
   var buf = '';
   document.addEventListener('keydown', function (e) {
     if (e.key.length !== 1) return;
-    buf = (buf + e.key.toLowerCase()).slice(-6);
+    buf = (buf + e.key.toLowerCase()).slice(-8);
     if (buf.indexOf('гусь') >= 0 || buf.indexOf('goose') >= 0 || buf.indexOf('гага') >= 0) {
       buf = '';
       if (typeof fireConfetti === 'function') fireConfetti();
@@ -129,6 +192,8 @@
       banner('Ты набрал секретное слово!');
       if (typeof playHonk === 'function') playHonk(1.3);
     }
+    if (buf.indexOf('сочи') >= 0) { buf = ''; banner('🌴 Сочи навсегда!'); if (typeof fireConfetti === 'function') fireConfetti(); }
+    if (buf.indexOf('3d') >= 0 || buf.indexOf('3д') >= 0) { buf = ''; banner('🖨️ Лаборатория 3D одобряет'); }
   });
   var badge = document.querySelector('.avatar-badge');
   if (badge) {
@@ -162,76 +227,56 @@
       if (mn >= 3) { e.preventDefault(); mn = 0; banner('Пиши гусю: га@га.га 😄'); }
     });
   }
-  try { console.log('%c🪿 Секреты: гусь×500/600 · скролл · Konami · «гусь» · G · фото×3', 'color:#00d4ff'); } catch (e) {}
-})();
-
-/* Ambient geese while scrolling — everywhere on the page */
-(function () {
-  var box = document.getElementById('ambient-geese');
-  if (!box) return;
-  var faces = ['🪿', '🦢', '🦆'];
-  var pool = [];
-  var max = 16;
-  function spawn() {
-    if (pool.length >= max) {
-      var old = pool.shift();
-      if (old && old.parentNode) old.parentNode.removeChild(old);
-    }
-    var el = document.createElement('span');
-    el.className = 'ambient-goose';
-    el.textContent = faces[Math.floor(Math.random() * faces.length)];
-    el.style.left = (Math.random() * 92 + 2) + 'vw';
-    el.style.top = (Math.random() * 85 + 5) + 'vh';
-    el.style.animationDelay = (Math.random() * 2) + 's';
-    el.style.fontSize = (1.1 + Math.random() * 1.2) + 'rem';
-    box.appendChild(el);
-    pool.push(el);
-    requestAnimationFrame(function () { el.classList.add('show'); });
-    setTimeout(function () {
-      el.classList.remove('show');
-      setTimeout(function () {
-        if (el.parentNode) el.parentNode.removeChild(el);
-        var i = pool.indexOf(el);
-        if (i >= 0) pool.splice(i, 1);
-      }, 500);
-    }, 4500 + Math.random() * 3500);
+  var phone = document.querySelector('a[href^="tel"]');
+  if (phone) {
+    var phn = 0, pht = 0;
+    phone.addEventListener('click', function (e) {
+      var now = Date.now(); if (now - pht > 900) phn = 0; pht = now; phn++;
+      if (phn >= 4) { e.preventDefault(); phn = 0; banner('📞 Гусь на линии: га-га-га'); if (typeof playHonk === 'function') playHonk(1.2); }
+    });
   }
-  var lastY = 0;
-  window.addEventListener('scroll', function () {
-    var y = window.scrollY;
-    if (Math.abs(y - lastY) > 70) {
-      lastY = y;
-      spawn();
-      if (Math.random() > 0.5) spawn();
-    }
-  }, { passive: true });
-  setTimeout(function () { spawn(); spawn(); spawn(); }, 800);
-})();
-
-/* After 600 clicks — denser geese on whole page */
-(function () {
-  var done = false;
-  setInterval(function () {
-    if (done || typeof clickCount === 'undefined') return;
-    if (clickCount >= 600) {
-      done = true;
-      if (typeof showFunBanner === 'function') showFunBanner('🪿 600! Гуси по всему сайту!', 4000);
-      if (typeof fireConfetti === 'function') fireConfetti();
-      var box = document.getElementById('ambient-geese');
-      if (!box) return;
-      for (var i = 0; i < 45; i++) {
-        (function (i) {
-          setTimeout(function () {
-            var el = document.createElement('span');
-            el.className = 'ambient-goose near show';
-            el.textContent = ['🪿', '🦢', '🦆'][i % 3];
-            el.style.left = (Math.random() * 95) + 'vw';
-            el.style.top = (Math.random() * 90) + 'vh';
-            el.style.fontSize = (1.4 + Math.random() * 1.6) + 'rem';
-            box.appendChild(el);
-          }, i * 35);
-        })(i);
+  document.querySelectorAll('.business-card').forEach(function (card, i) {
+    card.addEventListener('dblclick', function () {
+      banner(i === 0 ? '🧊 3D гусь одобряет' : '💾 Кибер-гусь на складе');
+      if (typeof playHonk === 'function') playHonk(1);
+    });
+  });
+  var h = new Date().getHours();
+  if (h >= 0 && h < 5) setTimeout(function () { if (typeof showToast === 'function') showToast('Поздняя гусиная смена 🌙'); }, 4000);
+  if (h >= 12 && h < 14) setTimeout(function () { if (typeof showToast === 'function') showToast('Обед? Гусь тоже голоден 🍞'); }, 5000);
+  var last = 0, hits = 0;
+  window.addEventListener('devicemotion', function (e) {
+    var a = e.accelerationIncludingGravity;
+    if (!a) return;
+    var force = Math.abs(a.x) + Math.abs(a.y) + Math.abs(a.z);
+    var now = Date.now();
+    if (force > 40 && now - last > 400) {
+      last = now; hits++;
+      if (hits >= 6) {
+        hits = 0; banner('Ты трясёшь телефон — гусь в шоке!');
+        if (typeof playHonk === 'function') playHonk(1.5);
+        if (typeof spawnFeathers === 'function') spawnFeathers(15);
+        if (typeof fireConfetti === 'function') fireConfetti();
       }
     }
-  }, 350);
+  }, { passive: true });
+  var dn = 0, dt = 0;
+  document.addEventListener('keydown', function (e) {
+    if (e.key.toLowerCase() !== 'd') return;
+    var now = Date.now(); if (now - dt > 600) dn = 0; dt = now; dn++;
+    if (dn >= 3) {
+      dn = 0;
+      document.body.classList.toggle('secret-invert');
+      banner(document.body.classList.contains('secret-invert') ? '🌑 Инверсия!' : '☀️ Обратно');
+    }
+  });
+  document.querySelectorAll('.section-title').forEach(function (t) {
+    var n = 0, tm = 0;
+    t.style.cursor = 'pointer';
+    t.addEventListener('click', function () {
+      var now = Date.now(); if (now - tm > 700) n = 0; tm = now; n++;
+      if (n >= 2) { n = 0; banner('Заголовок: ' + (t.textContent || '').trim().slice(0, 24)); }
+    });
+  });
+  try { console.log('%c🪿 Раздел «Намёки» — подсказки без полной инструкции.', 'color:#00d4ff'); } catch (e) {}
 })();
