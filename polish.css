@@ -1,0 +1,12 @@
+/* Final polish overrides */
+html{scroll-behavior:auto}
+html.smooth-ready{scroll-behavior:smooth}
+body.menu-open{overflow:hidden}
+.hero{min-height:100vh;min-height:100dvh}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+.reveal.visible{opacity:1;transform:none}
+.back-top.show{opacity:1;visibility:visible}
+@media(max-width:600px){
+  .goose-widget{bottom:16px;right:16px}
+  .back-top{bottom:100px;right:16px}
+}
