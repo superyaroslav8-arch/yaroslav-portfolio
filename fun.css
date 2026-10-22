@@ -1,0 +1,112 @@
+/* fun.css — goose, banners, hack, floods */
+.goose-widget,.goose-btn,.goose-btn *{touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none}
+.goose-widget{position:fixed;bottom:24px;right:24px;z-index:950}
+.goose-btn{
+  width:72px;height:72px;border-radius:50%;border:none;cursor:pointer;
+  background:linear-gradient(145deg,#fff8e7,#ffe4a0);
+  box-shadow:0 8px 28px rgba(255,180,50,.5);
+  display:flex;align-items:center;justify-content:center;position:relative;
+  transition:transform .15s;animation:goose-idle 2.8s ease-in-out infinite;
+}
+.goose-btn:hover{transform:scale(1.08)}
+.goose-btn:active{transform:scale(.9)}
+.goose-btn.honking{animation:goose-honk .28s ease}
+.goose-btn.combo{box-shadow:0 0 0 4px rgba(255,180,50,.55),0 8px 28px rgba(255,180,50,.5)}
+.goose-emoji{font-size:2.4rem;line-height:1;pointer-events:none}
+.goose-counter{
+  position:absolute;top:-6px;right:-6px;min-width:22px;height:22px;padding:0 6px;
+  border-radius:11px;background:#7c5cfc;color:#fff;font-size:.7rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;pointer-events:none;
+}
+.goose-counter[hidden]{display:none!important}
+@keyframes goose-idle{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes goose-honk{0%{transform:scale(1)}30%{transform:scale(1.15) rotate(-12deg)}100%{transform:scale(1)}}
+.goose-btn.explode{animation:goose-explode .9s ease forwards!important}
+@keyframes goose-explode{0%{transform:scale(1);opacity:1}40%{transform:scale(1.8);filter:brightness(2)}100%{transform:scale(3);opacity:0}}
+
+.goose-speech{
+  position:absolute;bottom:84px;right:0;min-width:80px;max-width:200px;
+  background:#1a1a26;border:1px solid rgba(255,228,160,.4);color:#fff;
+  padding:10px 14px;border-radius:14px 14px 4px 14px;font-size:.95rem;font-weight:600;
+  text-align:center;opacity:0;visibility:hidden;transform:translateY(8px) scale(.9);
+  transition:.2s;pointer-events:none;box-shadow:0 8px 24px rgba(0,0,0,.35);
+}
+.goose-speech.show{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+
+.fun-banner{
+  position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-20px);
+  background:linear-gradient(135deg,#7c5cfc,#ff6b9d);color:#fff;padding:10px 20px;
+  border-radius:40px;font-weight:700;font-size:.95rem;z-index:2800;
+  opacity:0;visibility:hidden;transition:.35s;pointer-events:none;max-width:90vw;text-align:center;
+}
+.fun-banner.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.toast{
+  position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:#1a1a26;border:1px solid rgba(124,92,252,.4);color:#f0f0f5;
+  padding:12px 22px;border-radius:12px;font-size:.9rem;z-index:3000;
+  opacity:0;visibility:hidden;transition:.3s;white-space:nowrap;
+}
+.toast.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.confetti-canvas{position:fixed;inset:0;pointer-events:none;z-index:2500}
+.feathers{position:fixed;inset:0;pointer-events:none;z-index:2400;overflow:hidden}
+.feather{position:absolute;font-size:1.2rem;animation:feather-fall 2.2s ease-in forwards}
+@keyframes feather-fall{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+
+.logo.spin-once{animation:logo-spin .6s ease}
+@keyframes logo-spin{to{transform:rotate(360deg)}}
+#name-fun{cursor:pointer}
+#name-fun.wiggle{animation:wiggle .5s ease}
+@keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-5deg)}75%{transform:rotate(5deg)}}
+body.rainbow-mode{animation:hue-rotate 4s linear infinite}
+@keyframes hue-rotate{from{filter:hue-rotate(0)}to{filter:hue-rotate(360deg)}}
+body.egg-shake{animation:page-shake .35s ease}
+@keyframes page-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}50%{transform:translateX(8px)}}
+
+.egg-overlay{position:fixed;inset:0;z-index:10000;pointer-events:none;display:none}
+.egg-overlay.active{display:block;pointer-events:auto}
+.egg-countdown{
+  position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;font-size:clamp(4rem,20vw,10rem);font-weight:800;
+  color:#fff;text-shadow:0 0 40px #7c5cfc,0 0 80px #ff6b9d;z-index:10002;
+  opacity:0;transition:opacity .2s;pointer-events:none;
+}
+.egg-countdown.show{opacity:1}
+.egg-geese-flood{position:fixed;inset:0;z-index:10001;overflow:hidden;pointer-events:none}
+.egg-geese-flood .flood-goose{position:absolute;font-size:2rem;animation:flood-in .8s ease forwards;opacity:0}
+@keyframes flood-in{0%{opacity:0;transform:translateX(var(--from-x)) scale(.3)}100%{opacity:1;transform:translateX(0) scale(1)}}
+
+.egg-hack{
+  position:fixed;inset:0;background:#000;z-index:10003;display:none;
+  align-items:center;justify-content:flex-start;flex-direction:column;color:#0f0;
+  font-family:ui-monospace,monospace;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:24px 16px 48px;box-sizing:border-box;animation:hack-fade-in .4s ease;
+}
+.egg-hack.show{display:flex}
+@keyframes hack-fade-in{from{opacity:0;filter:brightness(3)}to{opacity:1;filter:none}}
+.hack-matrix{position:absolute;inset:0;overflow:hidden;opacity:.3;pointer-events:none;font-size:12px;line-height:1.2;color:#0f0;white-space:pre;user-select:none}
+.hack-scan{
+  position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,0,.02) 2px,rgba(0,255,0,.02) 4px);
+  animation:scan 3s linear infinite;
+}
+@keyframes scan{from{background-position:0 0}to{background-position:0 80px}}
+.hack-content{position:relative;z-index:5;text-align:center;padding:24px;max-width:560px;width:100%;margin:auto}
+.hack-404{font-size:clamp(3rem,16vw,7rem);font-weight:900;color:#f44;margin:0;text-shadow:0 0 30px #f44;animation:glitch .8s infinite,hack-pulse 2s ease-in-out infinite}
+@keyframes glitch{0%,100%{transform:translate(0)}20%{transform:translate(-2px,1px)}40%{transform:translate(2px,-1px)}}
+@keyframes hack-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+.hack-title{font-size:1.5rem;color:#0f0;margin:12px 0;animation:flicker 1.5s steps(2) infinite}
+@keyframes flicker{0%,100%{opacity:1}50%{opacity:.65}80%{opacity:.4}}
+.hack-sub{color:#8f8;font-size:.95rem;margin-bottom:16px}
+.hack-code{text-align:left;background:rgba(0,40,0,.6);border:1px solid #0a0;padding:12px;border-radius:8px;font-size:.75rem;max-height:120px;overflow:hidden;color:#0f0;margin:0 auto 20px;width:100%;max-width:420px;box-shadow:0 0 20px rgba(0,255,0,.2)}
+.hack-goose{font-size:4rem;display:inline-block;transform:translateY(-120vh);transition:transform 1.2s cubic-bezier(.2,.8,.2,1.2)}
+.hack-goose.drop{transform:translateY(0);animation:goose-land .6s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes goose-land{0%{transform:translateY(-100vh) rotate(-20deg)}70%{transform:translateY(8px)}100%{transform:translateY(0)}}
+.hack-goose-say{color:#ffe4a0;font-size:1.1rem;font-weight:700;margin:12px 0;min-height:1.4em;font-family:Inter,sans-serif}
+.hack-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px;position:relative;z-index:30;pointer-events:auto}
+.hack-actions .btn,.hack-actions button{
+  min-height:48px;min-width:150px;pointer-events:auto!important;touch-action:manipulation;
+  z-index:31;position:relative;cursor:pointer;
+}
+.hack-actions .btn-outline{border-color:#0f0;color:#0f0}
+.hack-progress{color:#8f8;font-size:.9rem;margin-top:12px;font-family:Inter,sans-serif}
+body.egg-locked{overflow:hidden!important}
