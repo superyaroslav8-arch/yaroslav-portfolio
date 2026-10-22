@@ -170,63 +170,86 @@ document.querySelectorAll('.confetti-btn').forEach(btn => {
   btn.addEventListener('click', () => { fireConfetti(); showToast('🚀 Поехали!'); });
 });
 
-// Fun Goose — click to "га"
+// Fun Goose
 const gooseBtn = document.getElementById('goose-btn');
 const gooseSpeech = document.getElementById('goose-speech');
 const gooseEmoji = document.getElementById('goose-emoji');
-
 const gooseLines = [
   'Га!', 'Га-га!', 'Га-га-га!', 'Кря... ой, га!', 'Га 🪿',
   'Хлеб?', 'Га! Ярослав крутой!', 'Га-га-га-га!', 'Не трогай перо!',
   'Га! 3D круто!', 'Шшш... га!', 'Гаааа!', 'Я гусь, а не утка. Га!',
-  'Га! Напиши в Telegram!', 'Го-го-го... га!'
+  'Га! Напиши в Telegram!', 'Го-го-го... га!', 'Печеньки?',
+  'Га! Сочи лучший!', 'Ты кто? Га!', 'Я слежу... га-га',
+  'Кадеты тоже гакают?', 'ИИ? Га-га-га!', 'Печать на гусе запрещена'
 ];
+let clickCount = 0;
 
-function playHonk() {
+function playHonk(pitch) {
+  pitch = pitch || 1;
   try {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
     const now = ctx.currentTime;
     const o = ctx.createOscillator();
     const g = ctx.createGain();
     o.type = 'sawtooth';
-    o.frequency.setValueAtTime(280, now);
-    o.frequency.exponentialRampToValueAtTime(180, now + 0.12);
-    o.frequency.exponentialRampToValueAtTime(220, now + 0.22);
+    o.frequency.setValueAtTime(280 * pitch, now);
+    o.frequency.exponentialRampToValueAtTime(180 * pitch, now + 0.12);
+    o.frequency.exponentialRampToValueAtTime(220 * pitch, now + 0.22);
     g.gain.setValueAtTime(0.0001, now);
     g.gain.exponentialRampToValueAtTime(0.18, now + 0.02);
     g.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
-    o.connect(g);
-    g.connect(ctx.destination);
-    o.start(now);
-    o.stop(now + 0.3);
-    setTimeout(() => {
+    o.connect(g); g.connect(ctx.destination);
+    o.start(now); o.stop(now + 0.3);
+    setTimeout(function () {
       try {
         const o2 = ctx.createOscillator();
         const g2 = ctx.createGain();
         o2.type = 'sawtooth';
-        o2.frequency.setValueAtTime(320, ctx.currentTime);
-        o2.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.1);
+        o2.frequency.setValueAtTime(320 * pitch, ctx.currentTime);
+        o2.frequency.exponentialRampToValueAtTime(200 * pitch, ctx.currentTime + 0.1);
         g2.gain.setValueAtTime(0.0001, ctx.currentTime);
         g2.gain.exponentialRampToValueAtTime(0.12, ctx.currentTime + 0.015);
         g2.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.18);
-        o2.connect(g2);
-        g2.connect(ctx.destination);
-        o2.start();
-        o2.stop(ctx.currentTime + 0.2);
-      } catch (_) {}
+        o2.connect(g2); g2.connect(ctx.destination);
+        o2.start(); o2.stop(ctx.currentTime + 0.2);
+      } catch (e) {}
     }, 120);
-  } catch (_) {}
+  } catch (e) {}
   try {
     if (window.speechSynthesis) {
       window.speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance('Га');
-      u.lang = 'ru-RU';
-      u.rate = 1.15;
-      u.pitch = 1.4;
-      u.volume = 0.9;
+      u.lang = 'ru-RU'; u.rate = 1.15; u.pitch = 1.3 * pitch; u.volume = 0.9;
       window.speechSynthesis.speak(u);
     }
-  } catch (_) {}
+  } catch (e) {}
+}
+
+function spawnFeathers(n) {
+  n = n || 8;
+  const box = document.getElementById('feathers');
+  if (!box) return;
+  for (let i = 0; i < n; i++) {
+    const f = document.createElement('span');
+    f.className = 'feather';
+    f.textContent = ['🪶', '✨', '💛', '🪿'][Math.floor(Math.random() * 4)];
+    f.style.left = (Math.random() * 100) + 'vw';
+    f.style.top = (Math.random() * 30 + 10) + 'vh';
+    f.style.animationDelay = (Math.random() * 0.4) + 's';
+    f.style.fontSize = (0.9 + Math.random()) + 'rem';
+    box.appendChild(f);
+    setTimeout(function () { f.remove(); }, 2500);
+  }
+}
+
+function showFunBanner(text, ms) {
+  ms = ms || 2500;
+  const b = document.getElementById('fun-banner');
+  if (!b) return;
+  b.textContent = text;
+  b.classList.add('show');
+  clearTimeout(b._t);
+  b._t = setTimeout(function () { b.classList.remove('show'); }, ms);
 }
 
 let speechTimer = null;
@@ -235,43 +258,116 @@ function showGooseSpeech(text) {
   gooseSpeech.textContent = text;
   gooseSpeech.classList.add('show');
   clearTimeout(speechTimer);
-  speechTimer = setTimeout(() => gooseSpeech.classList.remove('show'), 1800);
+  speechTimer = setTimeout(function () { gooseSpeech.classList.remove('show'); }, 1800);
 }
 
 let busy = false;
-gooseBtn?.addEventListener('click', () => {
+gooseBtn && gooseBtn.addEventListener('click', function () {
   if (busy) return;
   busy = true;
+  clickCount++;
   gooseBtn.classList.add('honking');
   const line = gooseLines[Math.floor(Math.random() * gooseLines.length)];
   showGooseSpeech(line);
-  playHonk();
-  if (gooseEmoji) gooseEmoji.textContent = Math.random() > 0.7 ? '🦢' : '🪿';
-  setTimeout(() => {
+  playHonk(0.9 + Math.random() * 0.3);
+  spawnFeathers(5 + Math.floor(Math.random() * 5));
+  if (gooseEmoji) gooseEmoji.textContent = Math.random() > 0.75 ? '🦢' : '🪿';
+  if (clickCount === 5) showFunBanner('🪿 Гусь доволен! Ещё!');
+  if (clickCount === 10) { showFunBanner('Ты нажал 10 раз. Гусь уважает'); fireConfetti(); }
+  if (clickCount === 15) {
+    document.body.classList.add('shake-mode');
+    setTimeout(function () { document.body.classList.remove('shake-mode'); }, 500);
+    showFunBanner('Земля трясётся от гаканья!');
+  }
+  if (clickCount === 25) {
+    document.body.classList.add('rainbow-mode');
+    showFunBanner('🌈 Радужный режим гуся!');
+    setTimeout(function () { document.body.classList.remove('rainbow-mode'); }, 8000);
+  }
+  if (clickCount === 50) {
+    gooseBtn.classList.add('mega');
+    showFunBanner('🏆 Легенда гусей! 50 кликов');
+    fireConfetti();
+    setTimeout(function () { gooseBtn.classList.remove('mega'); }, 800);
+  }
+  setTimeout(function () {
     gooseBtn.classList.remove('honking');
     if (gooseEmoji) gooseEmoji.textContent = '🪿';
     busy = false;
   }, 500);
 });
 
-setInterval(() => {
+let pressTimer = null;
+gooseBtn && gooseBtn.addEventListener('mousedown', function () {
+  pressTimer = setTimeout(function () {
+    showGooseSpeech('🤫 Секрет: ↑↑↓↓←→←→BA');
+    showFunBanner('Долгое нажатие! Пасхалка ждёт');
+    playHonk(0.7);
+  }, 900);
+});
+['mouseup', 'mouseleave', 'touchend'].forEach(function (ev) {
+  gooseBtn && gooseBtn.addEventListener(ev, function () { clearTimeout(pressTimer); });
+});
+
+setInterval(function () {
   if (busy || !gooseSpeech || gooseSpeech.classList.contains('show')) return;
-  if (Math.random() > 0.4) return;
-  showGooseSpeech(['Га?', 'Хлеб...', 'Га-га'][Math.floor(Math.random() * 3)]);
+  if (Math.random() > 0.35) return;
+  showGooseSpeech(['Га?', 'Хлеб...', 'Га-га', 'Эй!', '...'][Math.floor(Math.random() * 5)]);
 }, 14000);
+
+let logoClicks = 0;
+const logoEl = document.getElementById('logo-fun');
+logoEl && logoEl.addEventListener('click', function (e) {
+  e.preventDefault();
+  logoClicks++;
+  logoEl.classList.add('spin-once');
+  setTimeout(function () { logoEl.classList.remove('spin-once'); }, 600);
+  if (logoClicks >= 7) {
+    logoClicks = 0;
+    fireConfetti();
+    showFunBanner('🎉 ЯС. секрет открыт!');
+    playHonk(1.2);
+  }
+});
+
+const nameEl = document.getElementById('name-fun');
+nameEl && nameEl.addEventListener('click', function () {
+  nameEl.classList.add('wiggle');
+  setTimeout(function () { nameEl.classList.remove('wiggle'); }, 500);
+  const jokes = ['Это я!', 'Суприненко 💪', 'Кадет и босс', '2015 🚀', 'Сочи forever'];
+  showFunBanner(jokes[Math.floor(Math.random() * jokes.length)]);
+});
+
+const realTitle = document.title;
+setInterval(function () {
+  if (Math.random() > 0.15) return;
+  const glitches = ['🪿 Га-га-га', 'Хлеб?', 'Ярослав был здесь', '3D + гуси', realTitle];
+  document.title = glitches[Math.floor(Math.random() * glitches.length)];
+  setTimeout(function () { document.title = realTitle; }, 2000);
+}, 18000);
 
 const konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
 let kIndex = 0;
-document.addEventListener('keydown', e => {
+document.addEventListener('keydown', function (e) {
   if (e.key === konami[kIndex] || e.key.toLowerCase() === konami[kIndex]) {
     kIndex++;
     if (kIndex === konami.length) {
       kIndex = 0;
       fireConfetti();
-      showToast('🪿 Режим гуся!');
-      for (let i = 0; i < 5; i++) setTimeout(() => { playHonk(); showGooseSpeech('ГА-ГА-ГА!'); }, i * 280);
+      document.body.classList.add('rainbow-mode');
+      showFunBanner('🪿 KONAMI! Режим гуся на максимум');
+      for (let i = 0; i < 6; i++) {
+        (function (i) {
+          setTimeout(function () {
+            playHonk(1 + i * 0.08);
+            showGooseSpeech('ГА!');
+            spawnFeathers(6);
+          }, i * 250);
+        })(i);
+      }
+      setTimeout(function () { document.body.classList.remove('rainbow-mode'); }, 10000);
     }
   } else kIndex = 0;
 });
 
-setTimeout(() => showToast('Нажми на гуся 🪿'), 1500);
+setTimeout(function () { showToast('В углу только гусь 🪿 — жми!'); }, 1600);
