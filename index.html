@@ -1,151 +1,159 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Портфолио Суприненко Ярослава Ильича — кадет, предприниматель, IT & 3D. Дата рождения: 16 ноября 2015. Сочи.">
-    <title>Ярослав Суприненко | Портфолио</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Портфолио Суприненко Ярослава Ильича — кадет, предприниматель, IT & 3D. 16 ноября 2015. Сочи.">
+<title>Ярослав Суприненко | Портфолио</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <div class="scroll-progress" id="scroll-progress"></div>
-    <nav class="navbar" id="navbar">
-        <div class="container nav-container">
-            <a href="#home" class="logo">ЯС<span>.</span></a>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#home">Главная</a></li>
-                <li><a href="#about">Обо мне</a></li>
-                <li><a href="#business">Бизнес</a></li>
-                <li><a href="#geese">Гуси</a></li>
-                <li><a href="#skills">Навыки</a></li>
-                <li><a href="#gallery">Фото</a></li>
-                <li><a href="#contact">Контакты</a></li>
-            </ul>
-            <button class="menu-toggle" id="menu-toggle" aria-label="Меню"><span></span><span></span><span></span></button>
-        </div>
-    </nav>
-    <a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener" class="float-tg" aria-label="Telegram"><i class="fab fa-telegram-plane"></i><span class="float-tg-pulse"></span></a>
-    <section class="hero" id="home">
-        <div class="hero-bg"></div>
-        <canvas id="particles" class="particles-canvas"></canvas>
-        <div class="container hero-content">
-            <div class="hero-text">
-                <p class="hero-greeting"><span class="wave">👋</span> Привет, я</p>
-                <h1 class="hero-name">Ярослав<br><span class="gradient-text">Суприненко</span></h1>
-                <p class="hero-tagline"><span class="typed-wrap"><span id="typed"></span><span class="cursor-blink">|</span></span></p>
-                <div class="hero-buttons">
-                    <a href="#business" class="btn btn-primary"><i class="fas fa-rocket"></i> Мои проекты</a>
-                    <a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener" class="btn btn-outline"><i class="fab fa-telegram"></i> Написать</a>
-                </div>
-                <div class="hero-social">
-                    <a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener" class="telegram-main" title="Telegram"><i class="fab fa-telegram"></i></a>
-                    <a href="mailto:superyaroslav8@iCloud.com" title="Email"><i class="fas fa-envelope"></i></a>
-                    <a href="https://github.com/superyaroslav8-arch" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="tel:+79002373222" title="Позвонить"><i class="fas fa-phone"></i></a>
-                </div>
-                <p class="hero-phone"><i class="fas fa-phone-alt"></i> +7 (900) 237-32-22</p>
-            </div>
-            <div class="hero-image">
-                <div class="avatar-wrapper">
-                    <img src="https://litter.catbox.moe/p4he57.jpg" alt="Ярослав Суприненко" class="avatar" id="main-photo">
-                    <div class="avatar-ring"></div>
-                    <div class="avatar-badge"><i class="fas fa-star"></i></div>
-                    <div class="avatar-glow"></div>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator"><a href="#about"><i class="fas fa-chevron-down"></i></a></div>
-    </section>
-    <section class="about" id="about">
-        <div class="container">
-            <h2 class="section-title">Обо <span>мне</span></h2>
-            <div class="about-grid">
-                <div class="about-card"><div class="about-icon"><i class="fas fa-birthday-cake"></i></div><h3>Дата рождения</h3><p class="highlight">16 ноября 2015</p><p>Сочи, Россия</p></div>
-                <div class="about-card"><div class="about-icon"><i class="fas fa-graduation-cap"></i></div><h3>Образование</h3><p>5-й кадетский класс<br>МОБУ СОШ № 7</p><p>3-й курс «Академия ТОП»</p></div>
-                <div class="about-card"><div class="about-icon"><i class="fas fa-dumbbell"></i></div><h3>Спорт</h3><p>Тяжёлая атлетика</p><p>Ранее: дзюдо, плавание</p></div>
-                <div class="about-card"><div class="about-icon"><i class="fas fa-robot"></i></div><h3>Интересы</h3><p>Робототехника, электроника</p><p>ИИ и современные технологии</p></div>
-            </div>
-            <div class="about-text"><p>Я — молодой предприниматель и разработчик из Сочи. Совмещаю учёбу в кадетском классе и компьютерной академии с бизнесом в 3D-печати и цифровых услугах. Создаю сайты и проекты с помощью ИИ. И да — <strong>я очень люблю гусей</strong> 🪿</p></div>
-        </div>
-    </section>
-    <section class="business" id="business">
-        <div class="container">
-            <h2 class="section-title"><span>Бизнес</span></h2>
-            <div class="business-grid">
-                <article class="business-card">
-                    <div class="business-header"><div class="business-icon lab3d"><i class="fas fa-cube"></i></div><div><h3>«Лаборатория 3D»</h3><span class="badge">3D-печать</span></div></div>
-                    <p class="business-desc">Изготовление изделий на 3D-принтере: детали, прототипы, сувениры — под заказ.</p>
-                    <ul class="business-features"><li><i class="fas fa-check"></i> Высокое качество</li><li><i class="fas fa-check"></i> Быстрые сроки</li><li><i class="fas fa-check"></i> Индивидуальный подход</li></ul>
-                    <div class="business-links"><a href="https://site-17799.host-ai.site/" target="_blank" rel="noopener" class="btn btn-sm btn-primary"><i class="fas fa-globe"></i> Сайт</a><a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener" class="btn btn-sm btn-outline"><i class="fab fa-telegram"></i> Telegram</a></div>
-                    <p class="business-phone"><i class="fas fa-phone"></i> +7 900 237 3222</p>
-                </article>
-                <article class="business-card">
-                    <div class="business-header"><div class="business-icon cyber"><i class="fas fa-store"></i></div><div><h3>«Кибер-склад»</h3><span class="badge cyber-badge">Цифровые товары</span></div></div>
-                    <p class="business-desc">Электронные монеты, аккаунты и помощь в цифровом пространстве.</p>
-                    <ul class="business-features"><li><i class="fas fa-check"></i> Электронные монеты</li><li><i class="fas fa-check"></i> Аккаунты</li><li><i class="fas fa-check"></i> Консультации</li></ul>
-                    <div class="business-links"><a href="https://superyaroslav8-arch.github.io/kiber-sklad/" target="_blank" rel="noopener" class="btn btn-sm btn-primary"><i class="fas fa-globe"></i> Сайт</a><a href="https://t.me/Cyber_warehouse_2026" target="_blank" rel="noopener" class="btn btn-sm btn-outline"><i class="fab fa-telegram"></i> Telegram</a></div>
-                    <p class="business-phone"><i class="fab fa-telegram"></i> @Cyber_warehouse_2026 <span class="note">(только Telegram)</span></p>
-                </article>
-            </div>
-        </div>
-    </section>
-    <section class="geese" id="geese">
-        <div class="container">
-            <h2 class="section-title">Я люблю <span>гусей</span> 🪿</h2>
-            <p class="geese-intro">Гуси — мои любимые птицы. Умные, красивые и очень крутые. Без них портфолио было бы неполным!</p>
-            <div class="geese-grid">
-                <div class="geese-card"><img src="https://images.pexels.com/photos/24613695/pexels-photo-24613695.jpeg?auto=compress&cs=tinysrgb&h=600&w=600" alt="Белые гуси" loading="lazy"><p>Белые гуси у пруда</p></div>
-                <div class="geese-card"><img src="https://images.pexels.com/photos/22881997/pexels-photo-22881997.jpeg?auto=compress&cs=tinysrgb&h=600&w=800" alt="Гуси на поле" loading="lazy"><p>Гуси на зелёном поле</p></div>
-                <div class="geese-card"><img src="https://images.pexels.com/photos/5966818/pexels-photo-5966818.jpeg?auto=compress&cs=tinysrgb&h=600&w=800" alt="Стая гусей" loading="lazy"><p>Стая гусей</p></div>
-            </div>
-        </div>
-    </section>
-    <section class="skills" id="skills">
-        <div class="container">
-            <h2 class="section-title">Навыки и <span>интересы</span></h2>
-            <div class="skills-grid">
-                <div class="skill-card"><div class="skill-icon"><i class="fas fa-code"></i></div><h3>Программирование</h3><p>Сайты, цифровые проекты и автоматизация с ИИ</p></div>
-                <div class="skill-card"><div class="skill-icon"><i class="fas fa-brain"></i></div><h3>Искусственный интеллект</h3><p>Разработка, дизайн и решение задач с помощью ИИ</p></div>
-                <div class="skill-card"><div class="skill-icon"><i class="fas fa-print"></i></div><h3>3D-технологии</h3><p>Моделирование и печать на 3D-принтере</p></div>
-                <div class="skill-card"><div class="skill-icon"><i class="fas fa-microchip"></i></div><h3>Робототехника</h3><p>Электроника и инженерные проекты</p></div>
-            </div>
-        </div>
-    </section>
-    <section class="gallery" id="gallery">
-        <div class="container">
-            <h2 class="section-title">Мои <span>фото</span></h2>
-            <div class="gallery-grid">
-                <div class="gallery-item main-gallery" data-src="https://litter.catbox.moe/p4he57.jpg"><img src="https://litter.catbox.moe/p4he57.jpg" alt="Ярослав — основное фото" class="gallery-main"><span class="gallery-label"><i class="fas fa-star"></i> Основное</span><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
-                <div class="gallery-item" data-src="https://litter.catbox.moe/s05m1b.jpg"><img src="https://litter.catbox.moe/s05m1b.jpg" alt="Кадетская форма" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
-                <div class="gallery-item" data-src="https://litter.catbox.moe/5z37ao.jpg"><img src="https://litter.catbox.moe/5z37ao.jpg" alt="Стиль GTA" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
-                <div class="gallery-item" data-src="https://images.pexels.com/photos/24613695/pexels-photo-24613695.jpeg?auto=compress&cs=tinysrgb&h=600&w=600"><img src="https://images.pexels.com/photos/24613695/pexels-photo-24613695.jpeg?auto=compress&cs=tinysrgb&h=400&w=400" alt="Гуси" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
-            </div>
-        </div>
-    </section>
-    <div class="lightbox" id="lightbox"><button class="lightbox-close" id="lightbox-close" aria-label="Закрыть">&times;</button><img src="" alt="" id="lightbox-img"></div>
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2 class="section-title">Связаться <span>со мной</span></h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item"><div class="contact-icon"><i class="fas fa-phone"></i></div><div><h4>Телефон</h4><a href="tel:+79002373222">+7 (900) 237-32-22</a></div></div>
-                    <div class="contact-item"><div class="contact-icon"><i class="fab fa-telegram"></i></div><div><h4>Мой Telegram</h4><a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener">@Yaroslav3D</a><p class="note-small">Основной контакт</p></div></div>
-                    <div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div><h4>Email</h4><a href="mailto:superyaroslav8@iCloud.com">superyaroslav8@iCloud.com</a></div></div>
-                    <div class="contact-item"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div><h4>Город</h4><p>Сочи, Россия</p></div></div>
-                </div>
-                <div class="contact-cta">
-                    <h3>Готов к новым проектам!</h3>
-                    <p>Напиши в Telegram — обсудим 3D-печать, IT-проекты или сотрудничество.</p>
-                    <a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener" class="btn btn-primary btn-lg"><i class="fab fa-telegram"></i> Написать в Telegram</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <footer class="footer"><div class="container"><p>© 2026 Суприненко Ярослав Ильич</p><p class="footer-sub">Сделано с ❤️, ИИ и любовью к гусям 🪿 · <a href="https://github.com/superyaroslav8-arch/yaroslav-portfolio" target="_blank" rel="noopener">GitHub</a></p></div></footer>
-    <script src="script.js"></script>
+<div class="scroll-progress" id="scroll-progress"></div>
+<div class="cursor-glow" id="cursor-glow"></div>
+<nav class="navbar" id="navbar">
+<div class="container nav-container">
+<a href="#home" class="logo">ЯС<span>.</span></a>
+<ul class="nav-links" id="nav-links">
+<li><a href="#home">Главная</a></li>
+<li><a href="#about">Обо мне</a></li>
+<li><a href="#business">Бизнес</a></li>
+<li><a href="#skills">Навыки</a></li>
+<li><a href="#gallery">Фото</a></li>
+<li><a href="#contact">Контакты</a></li>
+</ul>
+<button class="menu-toggle" id="menu-toggle" aria-label="Меню"><span></span><span></span><span></span></button>
+</div>
+</nav>
+<a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener" class="float-tg" aria-label="Telegram"><i class="fab fa-telegram-plane"></i><span class="float-tg-pulse"></span></a>
+<div class="goose-widget" id="goose-widget">
+<div class="goose-chat" id="goose-chat">
+<div class="goose-chat-header"><span>🪿 Гусь-помощник</span><button type="button" id="goose-close" aria-label="Закрыть">&times;</button></div>
+<div class="goose-chat-messages" id="goose-messages"><div class="goose-msg goose-msg-bot">Га-га! Я Гусь Ярослава. Спроси про 3D, IT или просто поздоровайся 🪿</div></div>
+<div class="goose-chat-quick">
+<button type="button" data-q="привет">Привет</button>
+<button type="button" data-q="3d">3D-печать</button>
+<button type="button" data-q="кибер">Кибер-склад</button>
+<button type="button" data-q="контакты">Контакты</button>
+</div>
+<form class="goose-chat-form" id="goose-form">
+<input type="text" id="goose-input" placeholder="Напиши гусю..." autocomplete="off" maxlength="120">
+<button type="submit" aria-label="Отправить"><i class="fas fa-paper-plane"></i></button>
+</form>
+</div>
+<button type="button" class="goose-btn" id="goose-btn" aria-label="Открыть гуся"><span class="goose-emoji">🪿</span><span class="goose-bubble" id="goose-bubble">Га!</span></button>
+</div>
+<button type="button" class="back-top" id="back-top" aria-label="Наверх"><i class="fas fa-arrow-up"></i></button>
+<section class="hero" id="home">
+<div class="hero-bg"></div>
+<canvas id="particles" class="particles-canvas"></canvas>
+<div class="container hero-content">
+<div class="hero-text">
+<p class="hero-greeting"><span class="wave">👋</span> Привет, я</p>
+<h1 class="hero-name">Ярослав<br><span class="gradient-text">Суприненко</span></h1>
+<p class="hero-tagline"><span id="typed"></span><span class="cursor-blink">|</span></p>
+<div class="hero-buttons">
+<a href="#business" class="btn btn-primary confetti-btn"><i class="fas fa-rocket"></i> Мои проекты</a>
+<a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener" class="btn btn-outline"><i class="fab fa-telegram"></i> Написать</a>
+</div>
+<div class="hero-social">
+<a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener" class="telegram-main" title="Telegram"><i class="fab fa-telegram"></i></a>
+<a href="mailto:superyaroslav8@iCloud.com" title="Email"><i class="fas fa-envelope"></i></a>
+<a href="https://github.com/superyaroslav8-arch" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+<a href="tel:+79002373222" title="Позвонить"><i class="fas fa-phone"></i></a>
+</div>
+<p class="hero-phone"><i class="fas fa-phone-alt"></i> +7 (900) 237-32-22</p>
+</div>
+<div class="hero-image">
+<div class="avatar-wrapper">
+<img src="https://litter.catbox.moe/p4he57.jpg" alt="Ярослав Суприненко" class="avatar" id="main-photo">
+<div class="avatar-ring"></div>
+<div class="avatar-badge"><i class="fas fa-star"></i></div>
+<div class="avatar-glow"></div>
+</div>
+</div>
+</div>
+<div class="scroll-indicator"><a href="#about"><i class="fas fa-chevron-down"></i></a></div>
+</section>
+<section class="about" id="about">
+<div class="container">
+<h2 class="section-title">Обо <span>мне</span></h2>
+<div class="about-grid">
+<div class="about-card"><div class="about-icon"><i class="fas fa-birthday-cake"></i></div><h3>Дата рождения</h3><p class="highlight">16 ноября 2015</p><p>Сочи, Россия</p></div>
+<div class="about-card"><div class="about-icon"><i class="fas fa-graduation-cap"></i></div><h3>Образование</h3><p>5-й кадетский класс<br>МОБУ СОШ № 7</p><p>3-й курс «Академия ТОП»</p></div>
+<div class="about-card"><div class="about-icon"><i class="fas fa-dumbbell"></i></div><h3>Спорт</h3><p>Тяжёлая атлетика</p><p>Ранее: дзюдо, плавание</p></div>
+<div class="about-card"><div class="about-icon"><i class="fas fa-robot"></i></div><h3>Интересы</h3><p>Робототехника, электроника</p><p>ИИ и современные технологии</p></div>
+</div>
+<div class="about-text"><p>Я — молодой предприниматель и разработчик из Сочи. Совмещаю учёбу в кадетском классе и «Академии ТОП» с бизнесом в 3D-печати и цифровых услугах. Создаю сайты и проекты с помощью ИИ. А ещё очень люблю гусей — поговори с гусём в правом нижнем углу 🪿</p></div>
+</div>
+</section>
+<section class="business" id="business">
+<div class="container">
+<h2 class="section-title"><span>Бизнес</span></h2>
+<div class="business-grid">
+<article class="business-card">
+<div class="business-header"><div class="business-icon lab3d"><i class="fas fa-cube"></i></div><div><h3>«Лаборатория 3D»</h3><span class="badge">3D-печать</span></div></div>
+<p class="business-desc">Изготовление изделий на 3D-принтере: детали, прототипы, сувениры — под заказ.</p>
+<ul class="business-features"><li><i class="fas fa-check"></i> Высокое качество</li><li><i class="fas fa-check"></i> Быстрые сроки</li><li><i class="fas fa-check"></i> Индивидуальный подход</li></ul>
+<div class="business-links"><a href="https://site-17799.host-ai.site/" target="_blank" rel="noopener" class="btn btn-sm btn-primary"><i class="fas fa-globe"></i> Сайт</a><a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener" class="btn btn-sm btn-outline"><i class="fab fa-telegram"></i> Telegram</a></div>
+<p class="business-phone"><i class="fas fa-phone"></i> +7 900 237 3222</p>
+</article>
+<article class="business-card">
+<div class="business-header"><div class="business-icon cyber"><i class="fas fa-store"></i></div><div><h3>«Кибер-склад»</h3><span class="badge cyber-badge">Цифровые товары</span></div></div>
+<p class="business-desc">Электронные монеты, аккаунты и помощь в цифровом пространстве.</p>
+<ul class="business-features"><li><i class="fas fa-check"></i> Электронные монеты</li><li><i class="fas fa-check"></i> Аккаунты</li><li><i class="fas fa-check"></i> Консультации</li></ul>
+<div class="business-links"><a href="https://superyaroslav8-arch.github.io/kiber-sklad/" target="_blank" rel="noopener" class="btn btn-sm btn-primary"><i class="fas fa-globe"></i> Сайт</a><a href="https://t.me/Cyber_warehouse_2026" target="_blank" rel="noopener" class="btn btn-sm btn-outline"><i class="fab fa-telegram"></i> Telegram</a></div>
+<p class="business-phone"><i class="fab fa-telegram"></i> @Cyber_warehouse_2026 <span class="note">(только Telegram)</span></p>
+</article>
+</div>
+</div>
+</section>
+<section class="skills" id="skills">
+<div class="container">
+<h2 class="section-title">Навыки и <span>интересы</span></h2>
+<div class="skills-grid">
+<div class="skill-card"><div class="skill-icon"><i class="fas fa-code"></i></div><h3>Программирование</h3><p>Сайты, цифровые проекты и автоматизация с ИИ</p></div>
+<div class="skill-card"><div class="skill-icon"><i class="fas fa-brain"></i></div><h3>Искусственный интеллект</h3><p>Разработка, дизайн и решение задач с помощью ИИ</p></div>
+<div class="skill-card"><div class="skill-icon"><i class="fas fa-print"></i></div><h3>3D-технологии</h3><p>Моделирование и печать на 3D-принтере</p></div>
+<div class="skill-card"><div class="skill-icon"><i class="fas fa-microchip"></i></div><h3>Робототехника</h3><p>Электроника и инженерные проекты</p></div>
+</div>
+</div>
+</section>
+<section class="gallery" id="gallery">
+<div class="container">
+<h2 class="section-title">Мои <span>фото</span></h2>
+<div class="gallery-grid">
+<div class="gallery-item main-gallery" data-src="https://litter.catbox.moe/p4he57.jpg"><img src="https://litter.catbox.moe/p4he57.jpg" alt="Ярослав — основное" class="gallery-main"><span class="gallery-label"><i class="fas fa-star"></i> Основное</span><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+<div class="gallery-item" data-src="https://litter.catbox.moe/s05m1b.jpg"><img src="https://litter.catbox.moe/s05m1b.jpg" alt="Кадетская форма" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+<div class="gallery-item" data-src="https://litter.catbox.moe/5z37ao.jpg"><img src="https://litter.catbox.moe/5z37ao.jpg" alt="Стиль GTA" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+</div>
+</div>
+</section>
+<div class="lightbox" id="lightbox"><button class="lightbox-close" id="lightbox-close" aria-label="Закрыть">&times;</button><img src="" alt="" id="lightbox-img"></div>
+<section class="contact" id="contact">
+<div class="container">
+<h2 class="section-title">Связаться <span>со мной</span></h2>
+<div class="contact-content">
+<div class="contact-info">
+<div class="contact-item"><div class="contact-icon"><i class="fas fa-phone"></i></div><div><h4>Телефон</h4><a href="tel:+79002373222">+7 (900) 237-32-22</a></div></div>
+<div class="contact-item"><div class="contact-icon"><i class="fab fa-telegram"></i></div><div><h4>Мой Telegram</h4><a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener">@Yaroslav3D</a><p class="note-small">Основной контакт</p></div></div>
+<div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div><h4>Email</h4><a href="mailto:superyaroslav8@iCloud.com">superyaroslav8@iCloud.com</a></div></div>
+<div class="contact-item"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div><h4>Город</h4><p>Сочи, Россия</p></div></div>
+</div>
+<div class="contact-cta">
+<h3>Готов к новым проектам!</h3>
+<p>Напиши в Telegram — обсудим 3D-печать, IT-проекты или сотрудничество.</p>
+<a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener" class="btn btn-primary btn-lg confetti-btn"><i class="fab fa-telegram"></i> Написать в Telegram</a>
+</div>
+</div>
+</div>
+</section>
+<footer class="footer"><div class="container"><p>© 2026 Суприненко Ярослав Ильич</p><p class="footer-sub">Сделано с ❤️, ИИ и любовью к гусям 🪿 · <a href="https://github.com/superyaroslav8-arch/yaroslav-portfolio" target="_blank" rel="noopener">GitHub</a></p><p class="easter-hint">Попробуй код Konami ↑↑↓↓←→←→BA</p></div></footer>
+<div class="toast" id="toast"></div>
+<canvas id="confetti-canvas" class="confetti-canvas"></canvas>
+<script src="script.js"></script>
 </body>
 </html>
