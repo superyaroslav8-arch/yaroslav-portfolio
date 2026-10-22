@@ -79,7 +79,7 @@
 <div class="about-text">
 <p><strong>Супруненко Ярослав Ильич</strong> — кадет, студент и предприниматель из Сочи.</p>
 <p>Учусь в 5-м кадетском классе МОБУ СОШ № 7 и на 3-м курсе «Академии ТОП». Параллельно веду два проекта: <strong>«Лаборатория 3D»</strong> (печать на 3D-принтере) и <strong>«Кибер-склад»</strong> (цифровые товары). Делаю сайты и IT-проекты с помощью ИИ.</p>
-<p class="about-hint">🪿 Нажми на гуся справа внизу — он развлекает. Можно жать сколько угодно.</p>
+<p class="about-hint">🪿 Нажми на гуся справа внизу — он развлекает. Можно жать сколько угодно. После 500 кликов…</p>
 </div>
 </div>
 </section>
@@ -144,11 +144,33 @@
 </div>
 </div>
 </section>
-<footer class="footer"><div class="container"><p>© 2026 Супруненко Ярослав Ильич</p><p class="footer-sub">Сделано с ❤️, ИИ и любовью к гусям 🪿 · <a href="https://github.com/superyaroslav8-arch/yaroslav-portfolio" target="_blank" rel="noopener">GitHub</a></p><p class="easter-hint">Гусь · логотип 7 раз · Konami ↑↑↓↓←→←→BA</p></div></footer>
+<footer class="footer"><div class="container"><p>© 2026 Супруненко Ярослав Ильич</p><p class="footer-sub">Сделано с ❤️, ИИ и любовью к гусям 🪿 · <a href="https://github.com/superyaroslav8-arch/yaroslav-portfolio" target="_blank" rel="noopener">GitHub</a></p><p class="easter-hint">Гусь до 500 · скролл дальше низа · логотип 7× · Konami</p></div></footer>
 <div class="feathers" id="feathers" aria-hidden="true"></div>
 <div class="fun-banner" id="fun-banner"></div>
 <div class="toast" id="toast"></div>
 <canvas id="confetti-canvas" class="confetti-canvas"></canvas>
+<div id="egg-overlay" class="egg-overlay" aria-hidden="true">
+  <div class="egg-countdown" id="egg-countdown"></div>
+  <div class="egg-geese-flood" id="egg-geese-flood"></div>
+  <div class="egg-hack" id="egg-hack">
+    <div class="hack-matrix" id="hack-matrix"></div>
+    <div class="hack-content">
+      <p class="hack-404">404</p>
+      <p class="hack-title">Вы взломали сайт</p>
+      <p class="hack-sub" id="hack-sub">Обнаружено несанкционированное пролистывание…</p>
+      <pre class="hack-code" id="hack-code"></pre>
+      <div class="hack-goose-wrap" id="hack-goose-wrap">
+        <div class="hack-goose" id="hack-goose">🪿</div>
+        <p class="hack-goose-say" id="hack-goose-say"></p>
+        <div class="hack-actions" id="hack-actions" hidden>
+          <button type="button" class="btn btn-primary" id="hack-help">Помочь гусю</button>
+          <button type="button" class="btn btn-outline" id="hack-reload">Не помогать — перезагрузить</button>
+        </div>
+        <p class="hack-progress" id="hack-progress" hidden></p>
+      </div>
+    </div>
+  </div>
+</div>
 <script src="script.js"></script>
 </body>
 </html>
