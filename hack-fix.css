@@ -53,3 +53,58 @@ body.egg-locked .egg-hack{touch-action:pan-y;pointer-events:auto}
   .hack-code{max-height:80px!important}
   .hack-goose{font-size:3rem!important}
 }
+
+/* Stronger hack animation */
+.egg-hack.show{animation:hack-fade-in .4s ease}
+@keyframes hack-fade-in{
+  from{opacity:0;filter:brightness(3)}
+  to{opacity:1;filter:brightness(1)}
+}
+.hack-matrix{
+  animation:matrix-scroll 20s linear infinite;
+  background:repeating-linear-gradient(0deg,transparent,transparent 14px,rgba(0,255,0,.03) 14px,rgba(0,255,0,.03) 15px);
+}
+@keyframes matrix-scroll{
+  from{transform:translateY(0)}
+  to{transform:translateY(-50%)}
+}
+.hack-404{
+  animation:glitch 0.8s infinite, hack-pulse 2s ease-in-out infinite!important;
+}
+@keyframes hack-pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.04)}
+}
+.hack-title{animation:hack-title-flicker 1.5s steps(2) infinite}
+@keyframes hack-title-flicker{
+  0%,100%{opacity:1}
+  50%{opacity:.7}
+  75%{opacity:1}
+  80%{opacity:.4}
+}
+.hack-code{
+  animation:code-blink 0.15s steps(1) infinite;
+  border-color:#0f0!important;
+  box-shadow:0 0 20px rgba(0,255,0,.25);
+}
+@keyframes code-blink{50%{border-color:#0a0}}
+.hack-goose.drop{animation:goose-land .6s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes goose-land{
+  0%{transform:translateY(-100vh) rotate(-20deg);opacity:0}
+  70%{transform:translateY(10px) rotate(5deg);opacity:1}
+  100%{transform:translateY(0) rotate(0);opacity:1}
+}
+.egg-hack::before{
+  content:'';
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    0deg,transparent,transparent 2px,rgba(0,255,0,.015) 2px,rgba(0,255,0,.015) 4px
+  );
+  pointer-events:none;z-index:1;
+  animation:scan 4s linear infinite;
+}
+@keyframes scan{
+  from{background-position:0 0}
+  to{background-position:0 100px}
+}
+.hack-content{z-index:2}
