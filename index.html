@@ -16,7 +16,7 @@
 <div class="cursor-glow" id="cursor-glow"></div>
 <nav class="navbar" id="navbar">
 <div class="container nav-container">
-<a href="#home" class="logo">ЯС<span>.</span></a>
+<a href="#home" class="logo" id="logo-fun" title="Кликни 7 раз">ЯС<span>.</span></a>
 <ul class="nav-links" id="nav-links">
 <li><a href="#home">Главная</a></li>
 <li><a href="#about">Обо мне</a></li>
@@ -28,7 +28,6 @@
 <button class="menu-toggle" id="menu-toggle" aria-label="Меню"><span></span><span></span><span></span></button>
 </div>
 </nav>
-<a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener" class="float-tg" aria-label="Telegram"><i class="fab fa-telegram-plane"></i><span class="float-tg-pulse"></span></a>
 <div class="goose-widget" id="goose-widget">
 <div class="goose-speech" id="goose-speech" aria-live="polite"></div>
 <button type="button" class="goose-btn" id="goose-btn" aria-label="Гусь — нажми, чтобы услышать га">
@@ -42,7 +41,7 @@
 <div class="container hero-content">
 <div class="hero-text">
 <p class="hero-greeting"><span class="wave">👋</span> Привет, я</p>
-<h1 class="hero-name">Ярослав<br><span class="gradient-text">Суприненко</span></h1>
+<h1 class="hero-name">Ярослав<br><span class="gradient-text" id="name-fun">Суприненко</span></h1>
 <p class="hero-tagline"><span id="typed"></span><span class="cursor-blink">|</span></p>
 <div class="hero-buttons">
 <a href="#business" class="btn btn-primary confetti-btn"><i class="fas fa-rocket"></i> Мои проекты</a>
@@ -140,7 +139,9 @@
 </div>
 </div>
 </section>
-<footer class="footer"><div class="container"><p>© 2026 Суприненко Ярослав Ильич</p><p class="footer-sub">Сделано с ❤️, ИИ и любовью к гусям 🪿 · <a href="https://github.com/superyaroslav8-arch/yaroslav-portfolio" target="_blank" rel="noopener">GitHub</a></p><p class="easter-hint">Попробуй код Konami ↑↑↓↓←→←→BA</p></div></footer>
+<footer class="footer"><div class="container"><p>© 2026 Суприненко Ярослав Ильич</p><p class="footer-sub">Сделано с ❤️, ИИ и любовью к гусям 🪿 · <a href="https://github.com/superyaroslav8-arch/yaroslav-portfolio" target="_blank" rel="noopener">GitHub</a></p><p class="easter-hint">Попробуй код Konami ↑↑↓↓←→←→BA · кликни логотип 7 раз · жми гуся</p></div></footer>
+<div class="feathers" id="feathers" aria-hidden="true"></div>
+<div class="fun-banner" id="fun-banner"></div>
 <div class="toast" id="toast"></div>
 <canvas id="confetti-canvas" class="confetti-canvas"></canvas>
 <script src="script.js"></script>
