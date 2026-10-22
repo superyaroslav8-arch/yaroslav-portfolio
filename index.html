@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Портфолио Суприненко Ярослава Ильича — ученик 5-го кадетского класса, студент Академии ТОП, основатель Лаборатории 3D и Кибер-склада">
+    <meta name="description" content="Портфолио Суприненко Ярослава Ильича — ученик 5-го кадетского класса, студент Академии ТОП, основатель Лаборатории 3D и Кибер-склада. Дата рождения: 16 ноября 2015">
     <title>Суприненко Ярослав | Портфолио</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +20,9 @@
                 <li><a href="#home">Главная</a></li>
                 <li><a href="#about">Обо мне</a></li>
                 <li><a href="#business">Бизнес</a></li>
+                <li><a href="#geese">Гуси</a></li>
                 <li><a href="#skills">Навыки</a></li>
+                <li><a href="#gallery">Фото</a></li>
                 <li><a href="#contact">Контакты</a></li>
             </ul>
             <button class="menu-toggle" id="menu-toggle" aria-label="Меню">
@@ -36,21 +38,26 @@
             <div class="hero-text">
                 <p class="hero-greeting">Привет, я</p>
                 <h1 class="hero-name">Ярослав<br><span>Суприненко</span></h1>
-                <p class="hero-tagline">Ученик · Предприниматель · IT & 3D</p>
+                <p class="hero-tagline">Ученик · Предприниматель · IT & 3D · Люблю гусей 🪿</p>
                 <div class="hero-buttons">
-                    <a href="#business" class="btn btn-primary">Мои проекты</a>
-                    <a href="#contact" class="btn btn-outline">Связаться</a>
+                    <a href="#business" class="btn btn-primary">Проекты</a>
+                    <a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener" class="btn btn-outline">
+                        <i class="fab fa-telegram"></i> Telegram
+                    </a>
                 </div>
                 <div class="hero-social">
-                    <a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener" aria-label="Telegram 3D"><i class="fab fa-telegram"></i></a>
-                    <a href="https://t.me/Cyber_warehouse_2026" target="_blank" rel="noopener" aria-label="Telegram Кибер-склад"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener" aria-label="Мой Telegram" class="telegram-main">
+                        <i class="fab fa-telegram"></i>
+                    </a>
                     <a href="mailto:superyaroslav8@iCloud.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
                     <a href="https://github.com/superyaroslav8-arch" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="tel:+79002373222" aria-label="Телефон"><i class="fas fa-phone"></i></a>
                 </div>
+                <p class="hero-phone">+7 (900) 237-32-22</p>
             </div>
             <div class="hero-image">
                 <div class="avatar-wrapper">
-                    <img src="https://avatars.githubusercontent.com/u/280041024?v=4" alt="Ярослав Суприненко" class="avatar">
+                    <img src="https://avatars.githubusercontent.com/u/280041024?v=4" alt="Ярослав Суприненко" class="avatar" id="main-photo">
                     <div class="avatar-ring"></div>
                     <div class="avatar-badge"><i class="fas fa-rocket"></i></div>
                 </div>
@@ -67,16 +74,16 @@
             <h2 class="section-title">Обо <span>мне</span></h2>
             <div class="about-grid">
                 <div class="about-card">
+                    <div class="about-icon"><i class="fas fa-birthday-cake"></i></div>
+                    <h3>Дата рождения</h3>
+                    <p>16 ноября 2015 года</p>
+                    <p>Сочи, Россия</p>
+                </div>
+                <div class="about-card">
                     <div class="about-icon"><i class="fas fa-graduation-cap"></i></div>
                     <h3>Образование</h3>
                     <p>Ученик 5-го кадетского класса МОБУ СОШ № 7</p>
-                    <p>Студент 3-го курса компьютерной академии «Академия ТОП»</p>
-                </div>
-                <div class="about-card">
-                    <div class="about-icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <h3>Локация</h3>
-                    <p>Сочи, Россия</p>
-                    <p>Готов к удалённым проектам и сотрудничеству</p>
+                    <p>Студент 3-го курса «Академия ТОП»</p>
                 </div>
                 <div class="about-card">
                     <div class="about-icon"><i class="fas fa-dumbbell"></i></div>
@@ -92,7 +99,7 @@
                 </div>
             </div>
             <div class="about-text">
-                <p>Я — молодой предприниматель и разработчик из Сочи. Совмещаю учёбу в кадетском классе и компьютерной академии с собственным бизнесом в сфере 3D-печати и цифровых услуг. Увлечён программированием, созданием сайтов и проектов с использованием искусственного интеллекта.</p>
+                <p>Я — молодой предприниматель и разработчик из Сочи. Совмещаю учёбу в кадетском классе и компьютерной академии с собственным бизнесом в сфере 3D-печати и цифровых услуг. Увлечён программированием, созданием сайтов и проектов с использованием искусственного интеллекта. А ещё я очень люблю гусей! 🪿</p>
             </div>
         </div>
     </section>
@@ -100,9 +107,8 @@
     <!-- Business Section -->
     <section class="business" id="business">
         <div class="container">
-            <h2 class="section-title">Мой <span>бизнес</span></h2>
+            <h2 class="section-title"><span>Бизнес</span></h2>
             <div class="business-grid">
-                <!-- Lab 3D -->
                 <article class="business-card">
                     <div class="business-header">
                         <div class="business-icon lab3d"><i class="fas fa-cube"></i></div>
@@ -128,7 +134,6 @@
                     <p class="business-phone"><i class="fas fa-phone"></i> +7 900 237 3222</p>
                 </article>
 
-                <!-- Cyber Warehouse -->
                 <article class="business-card">
                     <div class="business-header">
                         <div class="business-icon cyber"><i class="fas fa-store"></i></div>
@@ -151,8 +156,30 @@
                             <i class="fab fa-telegram"></i> Telegram
                         </a>
                     </div>
-                    <p class="business-phone"><i class="fas fa-phone"></i> +7 938 875 0405 <span class="note">(только Telegram)</span></p>
+                    <p class="business-phone"><i class="fab fa-telegram"></i> @Cyber_warehouse_2026 <span class="note">(только Telegram)</span></p>
                 </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Geese Section -->
+    <section class="geese" id="geese">
+        <div class="container">
+            <h2 class="section-title">Я люблю <span>гусей</span> 🪿</h2>
+            <p class="geese-intro">Гуси — мои любимые птицы. Они умные, красивые и очень интересные. На этой странице — немного гусей, потому что без них портфолио было бы неполным!</p>
+            <div class="geese-grid">
+                <div class="geese-card">
+                    <img src="https://images.pexels.com/photos/24613695/pexels-photo-24613695.jpeg?auto=compress&cs=tinysrgb&h=600&w=600" alt="Белые гуси на ферме" loading="lazy">
+                    <p>Белые гуси у пруда</p>
+                </div>
+                <div class="geese-card">
+                    <img src="https://images.pexels.com/photos/22881997/pexels-photo-22881997.jpeg?auto=compress&cs=tinysrgb&h=600&w=800" alt="Гуси на пастбище" loading="lazy">
+                    <p>Гуси на зелёном поле</p>
+                </div>
+                <div class="geese-card">
+                    <img src="https://images.pexels.com/photos/5966818/pexels-photo-5966818.jpeg?auto=compress&cs=tinysrgb&h=600&w=800" alt="Стая гусей" loading="lazy">
+                    <p>Стая гусей на ферме</p>
+                </div>
             </div>
         </div>
     </section>
@@ -186,6 +213,29 @@
         </div>
     </section>
 
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Мои <span>фото</span></h2>
+            <div class="gallery-grid">
+                <div class="gallery-item main-gallery">
+                    <img src="https://avatars.githubusercontent.com/u/280041024?v=4" alt="Ярослав Суприненко — основное фото" class="gallery-main">
+                    <span class="gallery-label">Основное фото</span>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.pexels.com/photos/24613695/pexels-photo-24613695.jpeg?auto=compress&cs=tinysrgb&h=400&w=400" alt="Гуси" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.pexels.com/photos/22881997/pexels-photo-22881997.jpeg?auto=compress&cs=tinysrgb&h=400&w=400" alt="Гуси" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.pexels.com/photos/5966818/pexels-photo-5966818.jpeg?auto=compress&cs=tinysrgb&h=400&w=400" alt="Гуси" loading="lazy">
+                </div>
+            </div>
+            <p class="gallery-note">Основное фото — на главной. Остальные фото (в том числе гуси) разбросаны по сайту.</p>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
@@ -200,6 +250,14 @@
                         </div>
                     </div>
                     <div class="contact-item">
+                        <div class="contact-icon"><i class="fab fa-telegram"></i></div>
+                        <div>
+                            <h4>Мой Telegram</h4>
+                            <a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener">@Yaroslav3D</a>
+                            <p class="note-small">Основной контакт</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
                         <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                         <div>
                             <h4>Email</h4>
@@ -211,16 +269,6 @@
                         <div>
                             <h4>Город</h4>
                             <p>Сочи, Россия</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fab fa-telegram"></i></div>
-                        <div>
-                            <h4>Telegram</h4>
-                            <p>
-                                <a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener">@Yaroslav3D</a> · 
-                                <a href="https://t.me/Cyber_warehouse_2026" target="_blank" rel="noopener">@Cyber_warehouse_2026</a>
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -239,7 +287,7 @@
     <footer class="footer">
         <div class="container">
             <p>© 2026 Суприненко Ярослав Ильич. Все права защищены.</p>
-            <p class="footer-sub">Сделано с ❤️ и ИИ · <a href="https://github.com/superyaroslav8-arch/yaroslav-portfolio" target="_blank" rel="noopener">GitHub</a></p>
+            <p class="footer-sub">Сделано с ❤️, ИИ и любовью к гусям 🪿 · <a href="https://github.com/superyaroslav8-arch/yaroslav-portfolio" target="_blank" rel="noopener">GitHub</a></p>
         </div>
     </footer>
 
