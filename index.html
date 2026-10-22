@@ -23,6 +23,7 @@
 <li><a href="#business">Бизнес</a></li>
 <li><a href="#skills">Навыки</a></li>
 <li><a href="#gallery">Фото</a></li>
+<li><a href="#hints">Намёки</a></li>
 <li><a href="#contact">Контакты</a></li>
 </ul>
 <button class="menu-toggle" id="menu-toggle" aria-label="Меню"><span></span><span></span><span></span></button>
@@ -79,7 +80,7 @@
 <div class="about-text">
 <p><strong>Супруненко Ярослав Ильич</strong> — кадет, студент и предприниматель из Сочи.</p>
 <p>Учусь в 5-м кадетском классе МОБУ СОШ № 7 и на 3-м курсе «Академии ТОП». Параллельно веду два проекта: <strong>«Лаборатория 3D»</strong> (печать на 3D-принтере) и <strong>«Кибер-склад»</strong> (цифровые товары). Сайты и цифровые проекты делаю <strong>вместе с искусственным интеллектом</strong> — сам код с нуля не пишу, зато хорошо умею ставить задачи ИИ и доводить результат.</p>
-<p class="about-hint">🪿 Нажми на гуся справа внизу — он развлекает. Листай сайт — гуси появляются везде. После 500–600 кликов…</p>
+<p class="about-hint">🪿 Нажми на гуся справа внизу — он развлекает. После многих кликов по гусю… Подсказки — в разделе «Намёки».</p>
 </div>
 </div>
 </section>
@@ -126,6 +127,27 @@
 </div>
 </section>
 <div class="lightbox" id="lightbox"><button class="lightbox-close" id="lightbox-close" aria-label="Закрыть">&times;</button><img src="" alt="" id="lightbox-img"></div>
+<section class="hints" id="hints">
+<div class="container">
+<h2 class="section-title">Секретные <span>намёки</span></h2>
+<p class="hints-intro">Здесь только намёки. Полной инструкции нет — ищи сам.</p>
+<div class="hints-grid">
+<div class="hint-card"><span class="hint-num">01</span><p>В правом нижнем углу кто-то умеет говорить. Иногда много раз подряд — и что-то меняется.</p></div>
+<div class="hint-card"><span class="hint-num">02</span><p>Когда страница заканчивается, можно попробовать листать ещё…</p></div>
+<div class="hint-card"><span class="hint-num">03</span><p>Сверху слева есть буквы. Они любят внимание.</p></div>
+<div class="hint-card"><span class="hint-num">04</span><p>На клавиатуре есть стрелки и две буквы. Старая игра помнит комбинацию.</p></div>
+<div class="hint-card"><span class="hint-num">05</span><p>Главное фото не только для красоты — попробуй несколько раз.</p></div>
+<div class="hint-card"><span class="hint-num">06</span><p>Одно короткое слово про птицу. Можно набрать на клавиатуре.</p></div>
+<div class="hint-card"><span class="hint-num">07</span><p>Одна буква латинского алфавита. Если её долго держать…</p></div>
+<div class="hint-card"><span class="hint-num">08</span><p>Звезда на портрете считает клики.</p></div>
+<div class="hint-card"><span class="hint-num">09</span><p>Почта тоже реагирует, если нажать не один раз.</p></div>
+<div class="hint-card"><span class="hint-num">10</span><p>Имя на главной можно потрогать.</p></div>
+<div class="hint-card"><span class="hint-num">11</span><p>Телефон иногда «чувствует» тряску.</p></div>
+<div class="hint-card"><span class="hint-num">12</span><p>Открой инструменты разработчика — там что-то написано.</p></div>
+</div>
+<p class="hints-footer">Нашёл всё? Молодец. Не нашёл — листай, кликай, жми.</p>
+</div>
+</section>
 <section class="contact" id="contact">
 <div class="container">
 <h2 class="section-title">Связаться <span>со мной</span></h2>
@@ -144,8 +166,7 @@
 </div>
 </div>
 </section>
-<footer class="footer"><div class="container"><p>© 2026 Супруненко Ярослав Ильич</p><p class="footer-sub">Сделано с ❤️, ИИ и любовью к гусям 🪿 · <a href="https://github.com/superyaroslav8-arch/yaroslav-portfolio" target="_blank" rel="noopener">GitHub</a></p><p class="easter-hint">Гуси при скролле · гусь×500/600 · Konami · «гусь» · G · фото×3…</p></div></footer>
-<div class="ambient-geese" id="ambient-geese" aria-hidden="true"></div>
+<footer class="footer"><div class="container"><p>© 2026 Супруненко Ярослав Ильич</p><p class="footer-sub">Сделано с ❤️, ИИ и любовью к гусям 🪿 · <a href="https://github.com/superyaroslav8-arch/yaroslav-portfolio" target="_blank" rel="noopener">GitHub</a></p><p class="easter-hint">Раздел «Намёки» · гусь · край страницы · логотип…</p></div></footer>
 <div class="feathers" id="feathers" aria-hidden="true"></div>
 <div class="fun-banner" id="fun-banner"></div>
 <div class="toast" id="toast"></div>
@@ -165,7 +186,7 @@
         <p class="hack-goose-say" id="hack-goose-say"></p>
         <div class="hack-actions" id="hack-actions" hidden>
           <button type="button" class="btn btn-primary" id="hack-help">Помочь гусю</button>
-          <button type="button" class="btn btn-outline" id="hack-reload">Не помогать — перезагрузить</button>
+          <button type="button" class="btn btn-outline" id="hack-reload">Не помогать</button>
         </div>
         <p class="hack-progress" id="hack-progress" hidden></p>
       </div>
