@@ -1,6 +1,7 @@
-/* fun.js — goose (200), logo, name, hack, konami */
+/* fun.js — goose, hack, day/night, quotes */
 (function () {
   'use strict';
+
   function banner(t, ms) {
     var b = document.getElementById('fun-banner');
     if (!b) return;
@@ -68,15 +69,29 @@
       }
     } catch (e) {}
   }
-  function speak(text) {
+  function speak(text, pitch) {
     try {
       if (!window.speechSynthesis) return;
       window.speechSynthesis.cancel();
       var u = new SpeechSynthesisUtterance(text);
-      u.lang = 'ru-RU'; u.rate = 1; u.volume = 1;
+      u.lang = 'ru-RU'; u.rate = 0.95; u.pitch = pitch || 1; u.volume = 1;
       window.speechSynthesis.speak(u);
     } catch (e) {}
   }
+
+  function applyGooseTheme() {
+    var widget = document.getElementById('goose-widget');
+    var btn = document.getElementById('goose-btn');
+    if (!btn) return;
+    var now = new Date();
+    var moscowHour = (now.getUTCHours() + 3) % 24;
+    var isNight = moscowHour >= 21 || moscowHour < 7;
+    document.body.classList.toggle('goose-night', isNight);
+    document.body.classList.toggle('goose-day', !isNight);
+    if (widget) widget.setAttribute('data-mode', isNight ? 'night' : 'day');
+  }
+  applyGooseTheme();
+  setInterval(applyGooseTheme, 60000);
 
   var logo = document.getElementById('logo-fun');
   var logoClicks = 0;
@@ -183,7 +198,55 @@
     gooseBtn.addEventListener('touchend', function(e){ e.preventDefault(); doHonk(e); }, {passive:false});
   }
 
+  document.querySelectorAll('.quote-mic').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var card = btn.closest('.quote-card');
+      if (!card) return;
+      var q = card.querySelector('blockquote');
+      var text = q ? q.textContent.replace(/[«»]/g, '').trim() : '';
+      if (!text) return;
+      playHonk(1.05);
+      showSpeech('Га… слушай!');
+      setTimeout(function () { speak(text, 1.05); }, 400);
+      banner('🎤 Гусь читает поговорку…', 2200);
+    });
+  });
+
+  var reloadLocked = false;
+  function lockReloadHard() {
+    reloadLocked = true;
+    document.body.classList.add('reload-locked');
+    window.addEventListener('beforeunload', function (e) {
+      if (!reloadLocked) return;
+      e.preventDefault();
+      e.returnValue = '';
+      return '';
+    });
+    window.addEventListener('keydown', function (e) {
+      if (!reloadLocked) return;
+      if (e.key === 'F5' || ((e.ctrlKey || e.metaKey) && (e.key === 'r' || e.key === 'R'))) {
+        e.preventDefault();
+        e.stopPropagation();
+        toast('🔒 Перезагрузка заблокирована… почти');
+        return false;
+      }
+    }, true);
+    try {
+      history.pushState(null, '', location.href);
+      window.addEventListener('popstate', function () {
+        if (reloadLocked) {
+          history.pushState(null, '', location.href);
+          toast('🔒 Назад тоже не поможет');
+        }
+      });
+    } catch (e) {}
+  }
+
   var overscroll = 0, hackStarted = false;
+  var OVERSCROLL_NEED = 25;
+
   function startHack() {
     if (hackStarted) return;
     hackStarted = true;
@@ -198,84 +261,161 @@
     var progress = document.getElementById('hack-progress');
     var helpBtn = document.getElementById('hack-help');
     var reloadBtn = document.getElementById('hack-reload');
+    var title = document.querySelector('.hack-title');
+    var sub = document.getElementById('hack-sub');
+    var h404 = document.querySelector('.hack-404');
+
     if (overlay) overlay.classList.add('active');
     if (hack) hack.classList.add('show');
-    if (matrix) {
-      var linesM = [];
-      for (var i=0;i<40;i++){ var s=''; for(var j=0;j<48;j++) s+=String.fromCharCode(0x30A0+Math.floor(Math.random()*96)); linesM.push(s); }
-      matrix.textContent = linesM.join('\n');
+
+    function fillBinary() {
+      if (!matrix) return;
+      var w = 80, rows = 60, lines = [];
+      for (var i = 0; i < rows; i++) {
+        var s = '';
+        for (var j = 0; j < w; j++) s += Math.random() > 0.5 ? '1' : '0';
+        lines.push(s);
+      }
+      matrix.textContent = lines.join('\n');
     }
-    var codeLines = ['ACCESS VIOLATION 0x404','scroll.deltaY = INF','repair_pending...','goose.module.load()','override: UI_LOCK'];
+    fillBinary();
+    setInterval(fillBinary, 900);
+
+    var codeLines = [
+      '0x01 0x00 0x01 0x10',
+      'SCROLL_OVERFLOW = 1',
+      'repair_pending: 0',
+      'binary.stream 01001000',
+      'UI_LOCK = true'
+    ];
     if (code) {
-      var ci=0;
-      setInterval(function(){
-        code.textContent += codeLines[ci%codeLines.length]+'\n'; ci++;
-        if (code.textContent.split('\n').length>8) code.textContent=code.textContent.split('\n').slice(-6).join('\n')+'\n';
-      },400);
+      var ci = 0;
+      setInterval(function () {
+        code.textContent += codeLines[ci % codeLines.length] + '\n'; ci++;
+        if (code.textContent.split('\n').length > 8)
+          code.textContent = code.textContent.split('\n').slice(-6).join('\n') + '\n';
+      }, 400);
     }
-    setTimeout(function(){
+
+    setTimeout(function () {
       if (goose) goose.classList.add('drop');
       if (say) say.textContent = 'Эй! Что ты наделал? Сейчас починю.';
       speak('Эй! Что ты наделал? Сейчас починю.');
       playHonk(1);
-      setTimeout(function(){
-        if (actions) { actions.hidden=false; try{actions.scrollIntoView({behavior:'smooth',block:'center'});}catch(e){} }
-      },1200);
-    },2800);
-    var helpClicks=0, helped=false, refused=false;
-    function onHelp(e){
-      if(e){e.preventDefault();e.stopPropagation();}
-      if(refused)return; helped=true; helpClicks++; playHonk(1);
-      var msgs=['Спасибо!','Ещё чуть-чуть…','Почти!','Супер!','Готово!'];
-      var msg=msgs[Math.min(helpClicks-1,msgs.length-1)];
-      if(say)say.textContent=msg; speak(msg);
-      if(progress){progress.hidden=false;progress.textContent='Починка: '+Math.min(helpClicks*20,100)+'%';}
-      if(helpClicks>=5){ if(say)say.textContent='Починил! Перезагрузка…'; speak('Починил! Перезагрузка'); confetti(); if(actions)actions.hidden=true; setTimeout(function(){location.reload();},2000); }
-    }
-    function onRefuse(e){
-      if(e){e.preventDefault();e.stopPropagation();}
-      if(helped&&helpClicks>=5)return; refused=true; if(actions)actions.hidden=true;
-      if(say)say.textContent='Ну зря. Сиди со взломом. Перезагрузи сам.'; speak('Ну зря. Сиди со взломом.');
-      if(progress){progress.hidden=false;progress.textContent='Взлом продолжается. Перезагрузи страницу.';}
-    }
-    if(helpBtn){ helpBtn.onclick=onHelp; helpBtn.ontouchend=function(e){e.preventDefault();onHelp(e);}; }
-    if(reloadBtn){ reloadBtn.onclick=onRefuse; reloadBtn.ontouchend=function(e){e.preventDefault();onRefuse(e);}; }
-  }
-  function onOverscroll(){
-    if(hackStarted)return; overscroll++;
-    document.body.classList.add('egg-shake'); setTimeout(function(){document.body.classList.remove('egg-shake');},350);
-    try{if(navigator.vibrate)navigator.vibrate(40);}catch(e){}
-    if(overscroll===3)toast('Землетрясение?..');
-    if(overscroll===6)banner('Что это за тряска?');
-    if(overscroll===9)banner('Стоп… слишком далеко');
-    if(overscroll>=10)startHack();
-  }
-  window.addEventListener('wheel', function(e){
-    var atBottom=(window.innerHeight+window.scrollY)>=(document.documentElement.scrollHeight-2);
-    if(atBottom&&e.deltaY>0)onOverscroll();
-  },{passive:true});
-  var lastTouchY=0;
-  window.addEventListener('touchstart',function(e){ if(e.touches[0])lastTouchY=e.touches[0].clientY; },{passive:true});
-  window.addEventListener('touchmove',function(e){
-    if(!e.touches[0])return;
-    var dy=lastTouchY-e.touches[0].clientY; lastTouchY=e.touches[0].clientY;
-    var atBottom=(window.innerHeight+window.scrollY)>=(document.documentElement.scrollHeight-2);
-    if(atBottom&&dy>8)onOverscroll();
-  },{passive:true});
+      setTimeout(function () {
+        if (actions) {
+          actions.hidden = false;
+          try { actions.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+        }
+      }, 1200);
+    }, 2800);
 
-  var konami=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'], ki=0;
-  document.addEventListener('keydown',function(e){
-    if(e.key===konami[ki]||e.key.toLowerCase()===konami[ki]){ ki++; if(ki===konami.length){ ki=0; confetti(); document.body.classList.add('rainbow-mode'); banner('🪿 KONAMI!'); setTimeout(function(){document.body.classList.remove('rainbow-mode');},8000);} }
-    else ki=0;
+    var helpClicks = 0, helped = false, refused = false;
+
+    function onHelp(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      if (refused) return;
+      helped = true; helpClicks++; playHonk(1);
+      var msgs = ['Спасибо!', 'Ещё чуть-чуть…', 'Почти!', 'Супер!', 'Готово!'];
+      var msg = msgs[Math.min(helpClicks - 1, msgs.length - 1)];
+      if (say) say.textContent = msg; speak(msg);
+      if (progress) {
+        progress.hidden = false;
+        progress.textContent = 'Починка: ' + Math.min(helpClicks * 20, 100) + '%';
+      }
+      if (helpClicks >= 5) {
+        if (say) say.textContent = 'Починил! Перезагрузка…';
+        speak('Починил! Перезагрузка');
+        confetti();
+        if (actions) actions.hidden = true;
+        setTimeout(function () { location.reload(); }, 2000);
+      }
+    }
+
+    function onRefuse(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      if (helped && helpClicks >= 5) return;
+      refused = true;
+      if (title) title.style.display = 'none';
+      if (sub) sub.style.display = 'none';
+      if (h404) h404.style.display = 'none';
+      if (goose) {
+        goose.classList.add('fly-away');
+        setTimeout(function () { if (goose) goose.style.display = 'none'; }, 900);
+      }
+      if (say) say.style.display = 'none';
+      if (actions) actions.hidden = true;
+      if (progress) {
+        progress.hidden = false;
+        progress.textContent = 'Взлом продолжается. Перезагрузи страницу.';
+        progress.classList.add('hack-blink-red');
+      }
+      speak('Ну зря. Сиди со взломом.');
+      lockReloadHard();
+    }
+
+    if (helpBtn) {
+      helpBtn.onclick = onHelp;
+      helpBtn.ontouchend = function (e) { e.preventDefault(); onHelp(e); };
+    }
+    if (reloadBtn) {
+      reloadBtn.onclick = onRefuse;
+      reloadBtn.ontouchend = function (e) { e.preventDefault(); onRefuse(e); };
+    }
+  }
+
+  function onOverscroll() {
+    if (hackStarted) return;
+    overscroll++;
+    document.body.classList.add('egg-shake');
+    setTimeout(function () { document.body.classList.remove('egg-shake'); }, 350);
+    try { if (navigator.vibrate) navigator.vibrate(30); } catch (e) {}
+    if (overscroll === 8) toast('Землетрясение?..');
+    if (overscroll === 15) banner('Что это за тряска?');
+    if (overscroll === 20) banner('Стоп… слишком далеко');
+    if (overscroll === 23) banner('Ещё чуть-чуть…');
+    if (overscroll >= OVERSCROLL_NEED) startHack();
+  }
+
+  window.addEventListener('wheel', function (e) {
+    var atBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 2);
+    if (atBottom && e.deltaY > 0) onOverscroll();
+  }, { passive: true });
+
+  var lastTouchY = 0;
+  window.addEventListener('touchstart', function (e) {
+    if (e.touches[0]) lastTouchY = e.touches[0].clientY;
+  }, { passive: true });
+  window.addEventListener('touchmove', function (e) {
+    if (!e.touches[0]) return;
+    var dy = lastTouchY - e.touches[0].clientY;
+    lastTouchY = e.touches[0].clientY;
+    var atBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 2);
+    if (atBottom && dy > 8) onOverscroll();
+  }, { passive: true });
+
+  var konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'], ki = 0;
+  document.addEventListener('keydown', function (e) {
+    if (e.key === konami[ki] || e.key.toLowerCase() === konami[ki]) {
+      ki++;
+      if (ki === konami.length) {
+        ki = 0; confetti();
+        document.body.classList.add('rainbow-mode');
+        banner('🪿 KONAMI!');
+        setTimeout(function () { document.body.classList.remove('rainbow-mode'); }, 8000);
+      }
+    } else ki = 0;
   });
 
-  var photo=document.getElementById('main-photo');
-  if(photo){
-    var pn=0,pt=0; photo.style.cursor='pointer';
-    photo.addEventListener('click',function(){
-      var now=Date.now(); if(now-pt>700)pn=0; pt=now; pn++;
-      if(pn>=3){ confetti(); banner('📸 Классное фото!'); pn=0; }
+  var photo = document.getElementById('main-photo');
+  if (photo) {
+    var pn = 0, pt = 0;
+    photo.style.cursor = 'pointer';
+    photo.addEventListener('click', function () {
+      var now = Date.now(); if (now - pt > 700) pn = 0; pt = now; pn++;
+      if (pn >= 3) { confetti(); banner('📸 Классное фото!'); pn = 0; }
     });
   }
-  setTimeout(function(){ toast('Жми гуся 🪿 · внизу страницы — секрет'); },2000);
+
+  setTimeout(function () { toast('Жми гуся 🪿 · внизу страницы — секрет'); }, 2000);
 })();
