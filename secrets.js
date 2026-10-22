@@ -278,3 +278,19 @@
 
   console.log('%c✧ Секреты спрятаны. Ищи тихо.', 'color:#666');
 })();
+
+/* auto-load fix + eggs-100 */
+(function () {
+  if (window.__ysExtraLoaded) return;
+  window.__ysExtraLoaded = true;
+  var l = document.createElement('link');
+  l.rel = 'stylesheet';
+  l.href = 'hack-fix.css';
+  document.head.appendChild(l);
+  ['eggs-100.js', 'eggs-fix.js'].forEach(function (src) {
+    var s = document.createElement('script');
+    s.src = src;
+    s.defer = true;
+    document.body.appendChild(s);
+  });
+})();
