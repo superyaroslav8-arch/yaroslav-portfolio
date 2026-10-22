@@ -170,72 +170,95 @@ document.querySelectorAll('.confetti-btn').forEach(btn => {
   btn.addEventListener('click', () => { fireConfetti(); showToast('🚀 Поехали!'); });
 });
 
+// Fun Goose — click to "га"
 const gooseBtn = document.getElementById('goose-btn');
-const gooseChat = document.getElementById('goose-chat');
-const gooseMessages = document.getElementById('goose-messages');
-const gooseForm = document.getElementById('goose-form');
-const gooseInput = document.getElementById('goose-input');
-const gooseBubble = document.getElementById('goose-bubble');
+const gooseSpeech = document.getElementById('goose-speech');
+const gooseEmoji = document.getElementById('goose-emoji');
 
-const gooseReplies = {
-  'привет': ['Га-га-га! Привет! Я Гусь Ярослава 🪿', 'Здорово! Чем помочь?'],
-  '3d': ['«Лаборатория 3D» печатает детали, прототипы и сувениры. Пиши @Yaroslav3D или +7 900 237 3222!', '3D-печать — это круто! Закажи что-нибудь уникальное.'],
-  'кибер': ['«Кибер-склад» — монеты, аккаунты и помощь. Только Telegram: @Cyber_warehouse_2026', 'За цифровыми товарами — в @Cyber_warehouse_2026'],
-  'контакты': ['Телефон: +7 (900) 237-32-22\nTelegram: @Yaroslav3D\nEmail: superyaroslav8@iCloud.com\nСочи 🌴', 'Лучше всего писать в Telegram @Yaroslav3D'],
-  default: ['Га! Я просто гусь, но Ярослав умеет 3D и IT 🪿', 'Спроси про «3D», «Кибер» или «контакты» — отвечу!', 'Люблю хлеб и код Ярослава. Га-га!', 'Нажми быстрые кнопки ниже или напиши сам 👇']
-};
+const gooseLines = [
+  'Га!', 'Га-га!', 'Га-га-га!', 'Кря... ой, га!', 'Га 🪿',
+  'Хлеб?', 'Га! Ярослав крутой!', 'Га-га-га-га!', 'Не трогай перо!',
+  'Га! 3D круто!', 'Шшш... га!', 'Гаааа!', 'Я гусь, а не утка. Га!',
+  'Га! Напиши в Telegram!', 'Го-го-го... га!'
+];
 
-function addMsg(text, who) {
-  const div = document.createElement('div');
-  div.className = 'goose-msg goose-msg-' + who;
-  div.textContent = text;
-  gooseMessages.appendChild(div);
-  gooseMessages.scrollTop = gooseMessages.scrollHeight;
+function playHonk() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const now = ctx.currentTime;
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'sawtooth';
+    o.frequency.setValueAtTime(280, now);
+    o.frequency.exponentialRampToValueAtTime(180, now + 0.12);
+    o.frequency.exponentialRampToValueAtTime(220, now + 0.22);
+    g.gain.setValueAtTime(0.0001, now);
+    g.gain.exponentialRampToValueAtTime(0.18, now + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
+    o.connect(g);
+    g.connect(ctx.destination);
+    o.start(now);
+    o.stop(now + 0.3);
+    setTimeout(() => {
+      try {
+        const o2 = ctx.createOscillator();
+        const g2 = ctx.createGain();
+        o2.type = 'sawtooth';
+        o2.frequency.setValueAtTime(320, ctx.currentTime);
+        o2.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.1);
+        g2.gain.setValueAtTime(0.0001, ctx.currentTime);
+        g2.gain.exponentialRampToValueAtTime(0.12, ctx.currentTime + 0.015);
+        g2.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.18);
+        o2.connect(g2);
+        g2.connect(ctx.destination);
+        o2.start();
+        o2.stop(ctx.currentTime + 0.2);
+      } catch (_) {}
+    }, 120);
+  } catch (_) {}
+  try {
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance('Га');
+      u.lang = 'ru-RU';
+      u.rate = 1.15;
+      u.pitch = 1.4;
+      u.volume = 0.9;
+      window.speechSynthesis.speak(u);
+    }
+  } catch (_) {}
 }
 
-function gooseAnswer(q) {
-  const key = (q || '').toLowerCase().trim();
-  let pool = gooseReplies.default;
-  if (key.includes('привет') || key.includes('здрав') || key.includes('хай')) pool = gooseReplies['привет'];
-  else if (key.includes('3d') || key.includes('3д') || key.includes('печат') || key.includes('лаборатор')) pool = gooseReplies['3d'];
-  else if (key.includes('кибер') || key.includes('склад') || key.includes('монет') || key.includes('аккаунт')) pool = gooseReplies['кибер'];
-  else if (key.includes('контакт') || key.includes('телефон') || key.includes('телеграм') || key.includes('email') || key.includes('связ')) pool = gooseReplies['контакты'];
-  const reply = pool[Math.floor(Math.random() * pool.length)];
-  setTimeout(() => addMsg(reply, 'bot'), 400 + Math.random() * 400);
+let speechTimer = null;
+function showGooseSpeech(text) {
+  if (!gooseSpeech) return;
+  gooseSpeech.textContent = text;
+  gooseSpeech.classList.add('show');
+  clearTimeout(speechTimer);
+  speechTimer = setTimeout(() => gooseSpeech.classList.remove('show'), 1800);
 }
 
+let busy = false;
 gooseBtn?.addEventListener('click', () => {
-  gooseChat.classList.toggle('open');
-  if (gooseChat.classList.contains('open')) {
-    if (gooseBubble) gooseBubble.style.opacity = '0';
-    gooseInput?.focus();
-  }
-});
-document.getElementById('goose-close')?.addEventListener('click', () => gooseChat.classList.remove('open'));
-
-gooseForm?.addEventListener('submit', e => {
-  e.preventDefault();
-  const q = gooseInput.value.trim();
-  if (!q) return;
-  addMsg(q, 'user');
-  gooseInput.value = '';
-  gooseAnswer(q);
-});
-
-document.querySelectorAll('.goose-chat-quick button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const q = btn.getAttribute('data-q');
-    addMsg(btn.textContent, 'user');
-    gooseAnswer(q);
-  });
+  if (busy) return;
+  busy = true;
+  gooseBtn.classList.add('honking');
+  const line = gooseLines[Math.floor(Math.random() * gooseLines.length)];
+  showGooseSpeech(line);
+  playHonk();
+  if (gooseEmoji) gooseEmoji.textContent = Math.random() > 0.7 ? '🦢' : '🪿';
+  setTimeout(() => {
+    gooseBtn.classList.remove('honking');
+    if (gooseEmoji) gooseEmoji.textContent = '🪿';
+    busy = false;
+  }, 500);
 });
 
 setInterval(() => {
-  if (!gooseChat?.classList.contains('open') && gooseBtn) {
-    gooseBtn.classList.add('show-bubble');
-    setTimeout(() => gooseBtn.classList.remove('show-bubble'), 2500);
-  }
-}, 12000);
+  if (busy || !gooseSpeech || gooseSpeech.classList.contains('show')) return;
+  if (Math.random() > 0.4) return;
+  showGooseSpeech(['Га?', 'Хлеб...', 'Га-га'][Math.floor(Math.random() * 3)]);
+}, 14000);
 
 const konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
 let kIndex = 0;
@@ -245,11 +268,10 @@ document.addEventListener('keydown', e => {
     if (kIndex === konami.length) {
       kIndex = 0;
       fireConfetti();
-      showToast('🪿 Секретный режим гуся активирован!');
-      gooseChat?.classList.add('open');
-      addMsg('Ты нашёл пасхалку! Га-га-га! 🎉', 'bot');
+      showToast('🪿 Режим гуся!');
+      for (let i = 0; i < 5; i++) setTimeout(() => { playHonk(); showGooseSpeech('ГА-ГА-ГА!'); }, i * 280);
     }
   } else kIndex = 0;
 });
 
-setTimeout(() => showToast('Добро пожаловать! Поговори с гусём 🪿'), 1500);
+setTimeout(() => showToast('Нажми на гуся 🪿'), 1500);
