@@ -1,1 +1,217 @@
-PLACEHOLDER_INDEX
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="description" content="Портфолио Супруненко Ярослава Ильича — кадет, предприниматель, проекты с ИИ и 3D. Сочи.">
+<title>Ярослав Супруненко | Портфолио</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="quotes.css">
+<link rel="stylesheet" href="fun.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+<div class="scroll-progress" id="scroll-progress"></div>
+<nav class="navbar" id="navbar">
+  <div class="container nav-container">
+    <a href="#home" class="logo" id="logo-fun" title="Нажми">ЯС<span>.</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#home">Главная</a></li>
+      <li><a href="#about">Обо мне</a></li>
+      <li><a href="#business">Бизнес</a></li>
+      <li><a href="#skills">Навыки</a></li>
+      <li><a href="#quotes">Поговорки</a></li>
+      <li><a href="#gallery">Фото</a></li>
+      <li><a href="#contact">Контакты</a></li>
+    </ul>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="goose-widget" id="goose-widget">
+  <div class="goose-speech" id="goose-speech" aria-live="polite"></div>
+  <button type="button" class="goose-btn" id="goose-btn" aria-label="Гусь">
+    <span class="goose-emoji" id="goose-emoji">🪿</span>
+    <span class="goose-counter" id="goose-counter" hidden>0</span>
+  </button>
+</div>
+
+<button type="button" class="back-top" id="back-top" aria-label="Наверх"><i class="fas fa-arrow-up"></i></button>
+
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <canvas id="particles" class="particles-canvas"></canvas>
+  <div class="container hero-content">
+    <div class="hero-text">
+      <p class="hero-greeting"><span class="wave">👋</span> Привет, я</p>
+      <h1 class="hero-name">Ярослав<br><span class="gradient-text" id="name-fun">Супруненко</span></h1>
+      <p class="hero-tagline"><span id="typed"></span><span class="cursor-blink">|</span></p>
+      <div class="hero-buttons">
+        <a href="#business" class="btn btn-primary"><i class="fas fa-rocket"></i> Мои проекты</a>
+        <a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener" class="btn btn-outline"><i class="fab fa-telegram"></i> Написать</a>
+      </div>
+      <div class="hero-social">
+        <a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener" class="telegram-main" title="Telegram"><i class="fab fa-telegram"></i></a>
+        <a href="https://vkvideo.ru/@mr_gathget" target="_blank" rel="noopener" title="VK — Мистер Гаджет"><i class="fab fa-vk"></i></a>
+        <a href="mailto:superyaroslav8@iCloud.com" title="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://github.com/superyaroslav8-arch" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="tel:+79002373222" title="Позвонить"><i class="fas fa-phone"></i></a>
+      </div>
+      <p class="hero-phone"><i class="fas fa-phone-alt"></i> +7 (900) 237-32-22</p>
+    </div>
+    <div class="hero-image">
+      <div class="avatar-wrapper">
+        <img src="https://litter.catbox.moe/p4he57.jpg" alt="Ярослав Супруненко" class="avatar" id="main-photo">
+        <div class="avatar-ring"></div>
+        <div class="avatar-glow"></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator"><a href="#about"><i class="fas fa-chevron-down"></i></a></div>
+</section>
+
+<section class="about" id="about">
+  <div class="container">
+    <h2 class="section-title">Обо <span>мне</span></h2>
+    <div class="about-grid">
+      <div class="about-card"><div class="about-icon"><i class="fas fa-birthday-cake"></i></div><h3>Дата рождения</h3><p class="highlight">16 ноября 2015</p><p>Сочи, Россия</p></div>
+      <div class="about-card"><div class="about-icon"><i class="fas fa-graduation-cap"></i></div><h3>Образование</h3><p>5-й кадетский класс<br>МОБУ СОШ № 7</p><p>3-й курс «Академия ТОП»</p></div>
+      <div class="about-card"><div class="about-icon"><i class="fas fa-dumbbell"></i></div><h3>Спорт</h3><p>Тяжёлая атлетика</p><p>Ранее: дзюдо, плавание</p></div>
+      <div class="about-card"><div class="about-icon"><i class="fas fa-robot"></i></div><h3>Интересы</h3><p>Робототехника, электроника</p><p>ИИ и современные технологии</p></div>
+    </div>
+    <div class="about-text">
+      <p><strong>Супруненко Ярослав Ильич</strong> — кадет, студент и предприниматель из Сочи.</p>
+      <p>Учусь в 5-м кадетском классе МОБУ СОШ № 7 и на 3-м курсе «Академии ТОП». Параллельно веду два проекта: <strong>«Лаборатория 3D»</strong> и <strong>«Кибер-склад»</strong>. Сайты делаю <strong>вместе с ИИ</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="business" id="business">
+  <div class="container">
+    <h2 class="section-title"><span>Бизнес</span></h2>
+    <div class="business-grid">
+      <article class="business-card">
+        <div class="business-header"><div class="business-icon lab3d"><i class="fas fa-cube"></i></div><div><h3>«Лаборатория 3D»</h3><span class="badge">3D-печать</span></div></div>
+        <p class="business-desc">Изготовление изделий на 3D-принтере под заказ.</p>
+        <ul class="business-features"><li><i class="fas fa-check"></i> Высокое качество</li><li><i class="fas fa-check"></i> Быстрые сроки</li><li><i class="fas fa-check"></i> Индивидуальный подход</li></ul>
+        <div class="business-links"><a href="https://site-17799.host-ai.site/" target="_blank" rel="noopener" class="btn btn-sm btn-primary"><i class="fas fa-globe"></i> Сайт</a><a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener" class="btn btn-sm btn-outline"><i class="fab fa-telegram"></i> Telegram</a></div>
+        <p class="business-phone"><i class="fas fa-phone"></i> +7 900 237 3222</p>
+      </article>
+      <article class="business-card">
+        <div class="business-header"><div class="business-icon cyber"><i class="fas fa-store"></i></div><div><h3>«Кибер-склад»</h3><span class="badge cyber-badge">Цифровые товары</span></div></div>
+        <p class="business-desc">Электронные монеты, аккаунты и помощь.</p>
+        <ul class="business-features"><li><i class="fas fa-check"></i> Электронные монеты</li><li><i class="fas fa-check"></i> Аккаунты</li><li><i class="fas fa-check"></i> Консультации</li></ul>
+        <div class="business-links"><a href="https://superyaroslav8-arch.github.io/kiber-sklad/" target="_blank" rel="noopener" class="btn btn-sm btn-primary"><i class="fas fa-globe"></i> Сайт</a><a href="https://t.me/Cyber_warehouse_2026" target="_blank" rel="noopener" class="btn btn-sm btn-outline"><i class="fab fa-telegram"></i> Telegram</a></div>
+        <p class="business-phone"><i class="fab fa-telegram"></i> @Cyber_warehouse_2026</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="skills" id="skills">
+  <div class="container">
+    <h2 class="section-title">Навыки и <span>интересы</span></h2>
+    <div class="skills-grid">
+      <div class="skill-card"><div class="skill-icon"><i class="fas fa-code"></i></div><h3>Проекты с ИИ</h3><p>Сайты и цифровые продукты с помощью ИИ</p></div>
+      <div class="skill-card"><div class="skill-icon"><i class="fas fa-brain"></i></div><h3>Искусственный интеллект</h3><p>Промпты, дизайн, сайты через ИИ</p></div>
+      <div class="skill-card"><div class="skill-icon"><i class="fas fa-print"></i></div><h3>3D-технологии</h3><p>Моделирование и печать</p></div>
+      <div class="skill-card"><div class="skill-icon"><i class="fas fa-microchip"></i></div><h3>Робототехника</h3><p>Электроника и инженерия</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="quotes" id="quotes">
+  <div class="container">
+    <h2 class="section-title">Мои <span>поговорки</span></h2>
+    <p class="quotes-intro">Принципы работы с идеями и технологиями.</p>
+    <div class="quotes-grid">
+      <article class="quote-card"><span class="quote-num">01</span><blockquote>Мои идеи — начало новых проектов, а технологии — инструмент для их реализации.</blockquote><p class="quote-desc">Сначала замысел, потом инструмент.</p></article>
+      <article class="quote-card"><span class="quote-num">02</span><blockquote>Мой принцип — не просто изучать технологии, а применять их на практике.</blockquote><p class="quote-desc">Проверяю на реальных проектах.</p></article>
+      <article class="quote-card"><span class="quote-num">03</span><blockquote>Не жди технологий будущего — создавай их сегодня.</blockquote><p class="quote-desc">Делай то, что можно сейчас.</p></article>
+      <article class="quote-card"><span class="quote-num">04</span><blockquote>Большие результаты начинаются с маленьких шагов.</blockquote><p class="quote-desc">Из шагов складывается результат.</p></article>
+      <article class="quote-card"><span class="quote-num">05</span><blockquote>Технологии дают возможности, а идеи определяют направление.</blockquote><p class="quote-desc">Направление задаёт человек.</p></article>
+      <article class="quote-card"><span class="quote-num">06</span><blockquote>Меньше сомнений — больше экспериментов.</blockquote><p class="quote-desc">Лучше попробовать и поправить.</p></article>
+      <article class="quote-card"><span class="quote-num">07</span><blockquote>Будущее не угадывают — его разрабатывают.</blockquote><p class="quote-desc">Важнее прототип, чем прогнозы.</p></article>
+      <article class="quote-card"><span class="quote-num">08</span><blockquote>Каждая ошибка — данные для следующей попытки.</blockquote><p class="quote-desc">Ошибка — что улучшить дальше.</p></article>
+      <article class="quote-card"><span class="quote-num">09</span><blockquote>Не ограничивай идею тем, что уже существует.</blockquote><p class="quote-desc">Новые сочетания дают результат.</p></article>
+      <article class="quote-card"><span class="quote-num">10</span><blockquote>Не бойся создавать то, чего ещё не существует.</blockquote><p class="quote-desc">Если полезно — стоит воплотить.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="container">
+    <h2 class="section-title">Мои <span>фото</span></h2>
+    <div class="gallery-grid">
+      <div class="gallery-item main-gallery" data-src="https://litter.catbox.moe/p4he57.jpg"><img src="https://litter.catbox.moe/p4he57.jpg" alt="Основное" class="gallery-main"><span class="gallery-label"><i class="fas fa-star"></i> Основное</span><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+      <div class="gallery-item" data-src="https://litter.catbox.moe/s05m1b.jpg"><img src="https://litter.catbox.moe/s05m1b.jpg" alt="Кадет" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+      <div class="gallery-item" data-src="https://litter.catbox.moe/5z37ao.jpg"><img src="https://litter.catbox.moe/5z37ao.jpg" alt="GTA" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox"><button class="lightbox-close" id="lightbox-close" aria-label="Закрыть">&times;</button><img src="" alt="" id="lightbox-img"></div>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <h2 class="section-title">Связаться <span>со мной</span></h2>
+    <div class="contact-content">
+      <div class="contact-info">
+        <div class="contact-item"><div class="contact-icon"><i class="fas fa-phone"></i></div><div><h4>Телефон</h4><a href="tel:+79002373222">+7 (900) 237-32-22</a></div></div>
+        <div class="contact-item"><div class="contact-icon"><i class="fab fa-telegram"></i></div><div><h4>Telegram</h4><a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener">@Yaroslav3D</a></div></div>
+        <div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div><h4>Email</h4><a href="mailto:superyaroslav8@iCloud.com">superyaroslav8@iCloud.com</a></div></div>
+        <div class="contact-item"><div class="contact-icon"><i class="fab fa-vk"></i></div><div><h4>VK — Мистер Гаджет</h4><a href="https://vkvideo.ru/@mr_gathget" target="_blank" rel="noopener">vkvideo.ru/@mr_gathget</a></div></div>
+        <div class="contact-item"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div><h4>Город</h4><p>Сочи, Россия</p></div></div>
+      </div>
+      <div class="contact-cta">
+        <h3>Готов к новым проектам</h3>
+        <p>Напиши в Telegram — обсудим 3D, ИИ или сотрудничество.</p>
+        <a href="https://t.me/Yaroslav3D" target="_blank" rel="noopener" class="btn btn-primary btn-lg"><i class="fab fa-telegram"></i> Написать в Telegram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>© 2026 Супруненко Ярослав Ильич</p>
+    <p class="footer-sub">Сочи · проекты с ИИ и 3D · <a href="https://github.com/superyaroslav8-arch/yaroslav-portfolio" target="_blank" rel="noopener">GitHub</a></p>
+  </div>
+</footer>
+
+<div class="feathers" id="feathers" aria-hidden="true"></div>
+<div class="fun-banner" id="fun-banner"></div>
+<div class="toast" id="toast"></div>
+<canvas id="confetti-canvas" class="confetti-canvas"></canvas>
+
+<div id="egg-overlay" class="egg-overlay" aria-hidden="true">
+  <div class="egg-countdown" id="egg-countdown"></div>
+  <div class="egg-geese-flood" id="egg-geese-flood"></div>
+  <div class="egg-hack" id="egg-hack">
+    <div class="hack-matrix" id="hack-matrix"></div>
+    <div class="hack-scan"></div>
+    <div class="hack-content">
+      <p class="hack-404">404</p>
+      <p class="hack-title">Вы взломали сайт</p>
+      <p class="hack-sub" id="hack-sub">Слишком далеко вниз…</p>
+      <pre class="hack-code" id="hack-code"></pre>
+      <div class="hack-goose-wrap" id="hack-goose-wrap">
+        <div class="hack-goose" id="hack-goose">🪿</div>
+        <p class="hack-goose-say" id="hack-goose-say"></p>
+        <div class="hack-actions" id="hack-actions" hidden>
+          <button type="button" class="btn btn-primary" id="hack-help">Помочь гусю</button>
+          <button type="button" class="btn btn-outline" id="hack-reload">Не помогать</button>
+        </div>
+        <p class="hack-progress" id="hack-progress" hidden></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script src="fun.js"></script>
+</body>
+</html>
