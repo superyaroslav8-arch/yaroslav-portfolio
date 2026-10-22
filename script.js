@@ -170,7 +170,6 @@ document.querySelectorAll('.confetti-btn').forEach(btn => {
   btn.addEventListener('click', () => { fireConfetti(); showToast('🚀 Поехали!'); });
 });
 
-// Fun Goose — spam-friendly, no zoom
 const gooseBtn = document.getElementById('goose-btn');
 const gooseSpeech = document.getElementById('goose-speech');
 const gooseEmoji = document.getElementById('goose-emoji');
@@ -189,20 +188,14 @@ const gooseLines = [
 ];
 
 const milestoneMsgs = {
-  3: 'Тройное га!',
-  5: '🪿 Гусь доволен! Ещё!',
-  7: 'Семь — магическое число гусей',
-  10: '10 раз! Гусь уважает',
-  15: 'Земля трясётся от гаканья!',
-  20: '20 — гусиный юбилей',
-  25: '🌈 Радужный режим!',
-  30: 'Половина пути к легенде',
-  40: '40 кликов. Гусь в шоке',
-  50: '🏆 Легенда гусей! 50',
-  75: '75... Ты серьёзно?',
-  100: '💯 СТО ГАКОВ! Мастер гуся',
-  150: '150 🪿 Невозможно...',
-  200: '200. Гусь ушёл на пенсию. Шутка — он вернулся'
+  3: 'Тройное га!', 5: '🪿 Гусь доволен! Ещё!', 7: 'Семь — магическое число гусей',
+  10: '10 раз! Гусь уважает', 15: 'Земля трясётся от гаканья!', 20: '20 — гусиный юбилей',
+  25: '🌈 Радужный режим!', 30: 'Половина пути к легенде', 40: '40 кликов. Гусь в шоке',
+  50: '🏆 Легенда гусей! 50', 75: '75... Ты серьёзно?', 100: '💯 СТО ГАКОВ! Мастер гуся',
+  150: '150 🪿 Невозможно...', 200: '200. Гусь ушёл на пенсию. Шутка — он вернулся',
+  250: '250 — почти полпути к взрыву…', 300: '300! Гусь нервничает',
+  350: '350… что-то дребезжит', 400: '400 ⚠️ Гусь перегрет',
+  450: '450 — ещё 50 и…', 499: '499… последний га?'
 };
 
 let clickCount = 0;
@@ -280,28 +273,33 @@ function updateCounter() {
 
 function doGooseHonk(e) {
   if (e) { e.preventDefault(); e.stopPropagation(); }
+  if (window.__gooseExploded) return;
   const now = Date.now();
-  if (now - lastClick < 600) combo++;
-  else combo = 1;
+  if (now - lastClick < 600) combo++; else combo = 1;
   lastClick = now;
   clickCount++;
   updateCounter();
   const pitch = 0.85 + Math.min(combo, 12) * 0.04 + Math.random() * 0.1;
-  gooseBtn.classList.add('honking');
-  if (combo >= 5) gooseBtn.classList.add('combo');
+  if (gooseBtn) {
+    gooseBtn.classList.add('honking');
+    if (combo >= 5) gooseBtn.classList.add('combo');
+  }
   let line = gooseLines[Math.floor(Math.random() * gooseLines.length)];
   if (combo >= 3) line = 'Га×' + combo + '!';
   if (combo >= 8) line = 'ГА-ГА-ГА×' + combo;
   showGooseSpeech(line);
   playHonk(pitch);
   spawnFeathers(3 + Math.min(combo, 8));
-  if (gooseEmoji) {
-    const faces = ['🪿', '🦢', '🪿', '🦆'];
-    gooseEmoji.textContent = faces[Math.floor(Math.random() * faces.length)];
+  if (gooseEmoji) gooseEmoji.textContent = ['🪿', '🦢', '🪿', '🦆'][Math.floor(Math.random() * 4)];
+
+  if (clickCount >= 500 && !window.__gooseExploded) {
+    window.__gooseExploded = true;
+    triggerGooseExplosion();
+    return;
   }
   if (milestoneMsgs[clickCount]) {
     showFunBanner(milestoneMsgs[clickCount]);
-    if (clickCount === 10 || clickCount === 50 || clickCount === 100 || clickCount === 200) fireConfetti();
+    if ([10, 50, 100, 200, 300].indexOf(clickCount) >= 0) fireConfetti();
     if (clickCount === 15) {
       document.body.classList.add('shake-mode');
       setTimeout(function () { document.body.classList.remove('shake-mode'); }, 450);
@@ -311,35 +309,25 @@ function doGooseHonk(e) {
       setTimeout(function () { document.body.classList.remove('rainbow-mode'); }, 7000);
     }
     if (clickCount === 50 || clickCount === 100) {
-      gooseBtn.classList.add('mega');
-      setTimeout(function () { gooseBtn.classList.remove('mega'); }, 700);
+      gooseBtn && gooseBtn.classList.add('mega');
+      setTimeout(function () { gooseBtn && gooseBtn.classList.remove('mega'); }, 700);
     }
-  } else if (combo === 5) {
-    showFunBanner('🔥 Комбо ×5!');
-  } else if (combo === 10) {
-    showFunBanner('⚡ Комбо ×10! Гусь в огне');
-    fireConfetti();
-  }
+  } else if (combo === 5) showFunBanner('🔥 Комбо ×5!');
+  else if (combo === 10) { showFunBanner('⚡ Комбо ×10! Гусь в огне'); fireConfetti(); }
+
   setTimeout(function () {
-    gooseBtn.classList.remove('honking');
-    gooseBtn.classList.remove('combo');
+    if (gooseBtn) { gooseBtn.classList.remove('honking'); gooseBtn.classList.remove('combo'); }
     if (gooseEmoji) gooseEmoji.textContent = '🪿';
   }, 280);
 }
 
 if (gooseBtn) {
-  gooseBtn.addEventListener('touchend', function (e) {
-    e.preventDefault();
-    doGooseHonk(e);
-  }, { passive: false });
+  gooseBtn.addEventListener('touchend', function (e) { e.preventDefault(); doGooseHonk(e); }, { passive: false });
   gooseBtn.addEventListener('click', function (e) {
     if (Date.now() - lastClick < 50) return;
     doGooseHonk(e);
   });
-  gooseBtn.addEventListener('dblclick', function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-  });
+  gooseBtn.addEventListener('dblclick', function (e) { e.preventDefault(); e.stopPropagation(); });
   gooseBtn.addEventListener('contextmenu', function (e) { e.preventDefault(); });
 }
 
@@ -357,7 +345,7 @@ gooseBtn && gooseBtn.addEventListener('mousedown', function (e) {
 });
 
 setInterval(function () {
-  if (!gooseSpeech || gooseSpeech.classList.contains('show')) return;
+  if (window.__gooseExploded || !gooseSpeech || gooseSpeech.classList.contains('show')) return;
   if (Math.random() > 0.4) return;
   showGooseSpeech(['Га?', 'Хлеб...', 'Га-га', 'Эй!', '...', 'Жми'][Math.floor(Math.random() * 6)]);
 }, 16000);
@@ -381,15 +369,13 @@ const nameEl = document.getElementById('name-fun');
 nameEl && nameEl.addEventListener('click', function () {
   nameEl.classList.add('wiggle');
   setTimeout(function () { nameEl.classList.remove('wiggle'); }, 500);
-  const jokes = ['Это я!', 'Супруненко 💪', 'Кадет и босс', '2015 🚀', 'Сочи forever'];
-  showFunBanner(jokes[Math.floor(Math.random() * jokes.length)]);
+  showFunBanner(['Это я!', 'Супруненко 💪', 'Кадет и босс', '2015 🚀', 'Сочи forever'][Math.floor(Math.random() * 5)]);
 });
 
 const realTitle = document.title;
 setInterval(function () {
   if (Math.random() > 0.12) return;
-  const glitches = ['🪿 Га-га-га', 'Хлеб?', 'Ярослав был здесь', '3D + гуси', realTitle];
-  document.title = glitches[Math.floor(Math.random() * glitches.length)];
+  document.title = ['🪿 Га-га-га', 'Хлеб?', 'Ярослав был здесь', '3D + гуси', realTitle][Math.floor(Math.random() * 5)];
   setTimeout(function () { document.title = realTitle; }, 1800);
 }, 20000);
 
@@ -419,4 +405,196 @@ document.addEventListener('keydown', function (e) {
   } else kIndex = 0;
 });
 
-setTimeout(function () { showToast('Жми гуся 🪿 сколько угодно'); }, 1600);
+setTimeout(function () { showToast('Жми гуся 🪿 · скролль дальше низа…'); }, 1600);
+
+function speakText(text, pitch) {
+  try {
+    if (!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ru-RU'; u.rate = 1; u.pitch = pitch || 1; u.volume = 1;
+    window.speechSynthesis.speak(u);
+  } catch (e) {}
+}
+
+function triggerGooseExplosion() {
+  const overlay = document.getElementById('egg-overlay');
+  const countdown = document.getElementById('egg-countdown');
+  if (gooseBtn) {
+    gooseBtn.classList.add('explode');
+    playHonk(0.5);
+    showGooseSpeech('БАМ!');
+    showFunBanner('💥 ГУСЬ ВЗОРВАЛСЯ!', 3000);
+  }
+  setTimeout(function () {
+    if (gooseBtn) gooseBtn.style.display = 'none';
+    if (gooseSpeech) gooseSpeech.style.display = 'none';
+    if (overlay) overlay.classList.add('active');
+    let n = 10;
+    function tick() {
+      if (!countdown) return;
+      countdown.textContent = String(n);
+      countdown.classList.add('show');
+      playHonk(0.6 + (10 - n) * 0.05);
+      if (n <= 0) {
+        countdown.classList.remove('show');
+        countdown.textContent = '';
+        floodGeese();
+        return;
+      }
+      n--;
+      setTimeout(tick, 700);
+    }
+    tick();
+  }, 900);
+}
+
+function floodGeese() {
+  const flood = document.getElementById('egg-geese-flood');
+  const overlay = document.getElementById('egg-overlay');
+  if (!flood) return;
+  flood.innerHTML = '';
+  for (let i = 0; i < 180; i++) {
+    const g = document.createElement('span');
+    g.className = 'flood-goose';
+    g.textContent = ['🪿', '🦢', '🦆'][i % 3];
+    const fromLeft = Math.random() > 0.5;
+    g.style.setProperty('--from-x', fromLeft ? '-100vw' : '100vw');
+    g.style.left = (Math.random() * 100) + 'vw';
+    g.style.top = (Math.random() * 100) + 'vh';
+    g.style.fontSize = (1.2 + Math.random() * 2.2) + 'rem';
+    g.style.animationDelay = (Math.random() * 1.5) + 's';
+    flood.appendChild(g);
+  }
+  showFunBanner('🪿 Гуси захватили сайт. Перезагрузи страницу.', 8000);
+  if (overlay) { overlay.style.pointerEvents = 'auto'; overlay.style.cursor = 'not-allowed'; }
+}
+
+let overscrollCount = 0;
+let hackStarted = false;
+let lastOverscrollToast = 0;
+
+function tryVibrate(pattern) {
+  try { if (navigator.vibrate) navigator.vibrate(pattern); } catch (e) {}
+}
+
+function onOverscroll() {
+  if (hackStarted || window.__gooseExploded) return;
+  overscrollCount++;
+  document.body.classList.add('egg-shake');
+  setTimeout(function () { document.body.classList.remove('egg-shake'); }, 350);
+  tryVibrate([40, 30, 40]);
+  const msgs = [
+    'Это… землетрясение?', 'Почему всё трясётся?', 'Стоп, что происходит?',
+    'Сайт не рассчитан на это…', 'Ещё свайп — и что-то сломается', 'Осторожно!',
+    'Гусь тоже чувствует толчки…', 'Сейсмическая активность ↑'
+  ];
+  const now = Date.now();
+  if (now - lastOverscrollToast > 900) {
+    lastOverscrollToast = now;
+    showFunBanner(msgs[Math.min(overscrollCount - 1, msgs.length - 1)] || 'Трясётся…');
+  }
+  if (overscrollCount >= 50) startHackSequence();
+}
+
+function startHackSequence() {
+  if (hackStarted) return;
+  hackStarted = true;
+  const overlay = document.getElementById('egg-overlay');
+  const hack = document.getElementById('egg-hack');
+  const matrix = document.getElementById('hack-matrix');
+  const codeEl = document.getElementById('hack-code');
+  const goose = document.getElementById('hack-goose');
+  const say = document.getElementById('hack-goose-say');
+  const actions = document.getElementById('hack-actions');
+  const progress = document.getElementById('hack-progress');
+
+  if (overlay) overlay.classList.add('active');
+  if (hack) hack.classList.add('show');
+  document.body.classList.add('egg-locked');
+
+  if (matrix) {
+    const lines = [];
+    for (let i = 0; i < 40; i++) {
+      let s = '';
+      for (let j = 0; j < 80; j++) s += Math.random() > 0.5 ? '1' : '0';
+      lines.push(s);
+    }
+    matrix.textContent = lines.join('\n');
+    let mi = 0;
+    setInterval(function () {
+      if (!hackStarted) return;
+      lines[mi % lines.length] = lines[mi % lines.length].split('').map(function () {
+        return Math.random() > 0.5 ? '1' : '0';
+      }).join('');
+      matrix.textContent = lines.join('\n');
+      mi++;
+    }, 80);
+  }
+
+  const snippets = [
+    'GET /portfolio HTTP/1.1', 'access_granted = true',
+    'while (scroll) { reality.break(); }', 'inject(goose_protocol)',
+    'ERROR 404: page_not_found', 'system.integrity = 12%',
+    'load module://goose.repair', 'sudo fix --force --honk',
+    'console.log("Вы взломали сайт")', 'await sleep(10000)'
+  ];
+  let ci = 0;
+  if (codeEl) {
+    const cTimer = setInterval(function () {
+      codeEl.textContent = (codeEl.textContent + '\n' + snippets[ci % snippets.length]).split('\n').slice(-8).join('\n');
+      ci++;
+    }, 400);
+    setTimeout(function () { clearInterval(cTimer); }, 12000);
+  }
+
+  setTimeout(function () {
+    if (goose) goose.classList.add('drop');
+    if (say) say.textContent = 'Всё, сейчас починим.';
+    speakText('Всё, сейчас починим', 1.2);
+    playHonk(1);
+    setTimeout(function () {
+      if (actions) actions.hidden = false;
+      if (say) say.textContent = 'Поможешь починить? Кликай «Помочь гусю» или перезагрузи.';
+    }, 1800);
+  }, 10000);
+
+  const helpBtn = document.getElementById('hack-help');
+  const reloadBtn = document.getElementById('hack-reload');
+  let helpClicks = 0;
+  if (helpBtn) {
+    helpBtn.addEventListener('click', function () {
+      helpClicks++;
+      playHonk(1 + helpClicks * 0.05);
+      spawnFeathers(4);
+      if (progress) {
+        progress.hidden = false;
+        progress.textContent = 'Починка… ' + Math.min(100, helpClicks * 12) + '%';
+      }
+      if (helpClicks >= 9) {
+        if (say) say.textContent = 'Готово! Сайт снова в строю.';
+        speakText('Готово', 1.1);
+        fireConfetti();
+        setTimeout(function () { location.reload(); }, 1600);
+      }
+    });
+  }
+  if (reloadBtn) reloadBtn.addEventListener('click', function () { location.reload(); });
+}
+
+window.addEventListener('wheel', function (e) {
+  if (hackStarted || window.__gooseExploded) return;
+  const atBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 2);
+  if (atBottom && e.deltaY > 0) { e.preventDefault(); onOverscroll(); }
+}, { passive: false });
+
+let touchY = null;
+window.addEventListener('touchstart', function (e) {
+  if (e.touches[0]) touchY = e.touches[0].clientY;
+}, { passive: true });
+window.addEventListener('touchmove', function (e) {
+  if (hackStarted || window.__gooseExploded || touchY == null) return;
+  const atBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 2);
+  const y = e.touches[0].clientY;
+  if (atBottom && y < touchY - 8) { onOverscroll(); touchY = y; }
+}, { passive: true });
